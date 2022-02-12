@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { fa0, faBank, faChartLine, faChartPie, faFaceRelieved, faMoneyBill, faMoneyBillWave, faWallet } from '@fortawesome/free-solid-svg-icons'
 export default function NavTab() {
   return (
-    <SideNav className='bg-dark text-warning'
+    <SideNav className='bg-secondary' 
     onSelect={(selected) => {
         // Add your code here
     }}
@@ -19,33 +19,33 @@ export default function NavTab() {
     <SideNav.Nav defaultSelected="dashboard">
         <NavItem eventKey="dashboard">
             <NavIcon>
-                <FontAwesomeIcon icon={faChartPie} />
+                <FontAwesomeIcon icon={faChartPie} className="text-white"/>
             </NavIcon>
-            <NavText>
+            <NavText style={{color:'white'}}>
                 Dashboard
             </NavText>
         </NavItem>
         <NavItem eventKey="accounting">
             <NavIcon>
-                <FontAwesomeIcon icon={faWallet} />
+                <FontAwesomeIcon icon={faWallet} className="text-white" />
             </NavIcon>
-            <NavText>
+            <NavText style={{color:'white'}}>
                 Accounting
             </NavText>
         </NavItem>
         <NavItem eventKey="installment">
             <NavIcon>
-                <FontAwesomeIcon icon={faMoneyBillWave} />
+                <FontAwesomeIcon icon={faMoneyBillWave} className="text-white"/>
             </NavIcon>
-            <NavText>
+            <NavText style={{color:'white'}}>
                 Installment
             </NavText>
         </NavItem>
-        <NavItem eventKey="interest">
+        <NavItem eventKey="interest" nav>
             <NavIcon>
-                <FontAwesomeIcon icon={faBank} />
+                <FontAwesomeIcon icon={faBank} className="text-white"/>
             </NavIcon>
-            <NavText>
+            <NavText style={{color:'white'}}>
                 Interest Rate
             </NavText>
         </NavItem>
