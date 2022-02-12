@@ -7,8 +7,7 @@ const PORT = 3030
 
 const app = express()
 
-const database = "bbp"
-const mongodbUri = `mongodb+srv://bbp:bbp6751@cluster0.5jryn.mongodb.net/${database}?retryWrites=true&w=majority`
+const mongodbUri = process.env.MONGODB_URI
 
 const gmailAPI = require("./controllers/gmailAPI")
 const accounting = require("./controllers/accounting")
