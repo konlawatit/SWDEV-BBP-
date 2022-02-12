@@ -3,6 +3,11 @@ import NavTab from '../component/NavTab'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { Barchart } from '../component/Barchart';
+import { Linechart } from '../component/Linechart';
+
+
+
 export default function Accounting() {
   return (
       <div>
@@ -26,12 +31,10 @@ export default function Accounting() {
             <div className="row">
                 <div className="col-6">
                     <div className="row mb-3 mt-3">
-                        <div className="border border-secondary rounded" style={{'height':'40vh'}}>
-                            <h3>รายได้และรายจ่าย</h3>
-                        </div>
+                        <Linechart/>
                     </div>
                     <div className="row">
-                        <div className="border border-secondary rounded" style={{'height':'40vh'}}></div>
+                        <Barchart></Barchart>
                     </div>
                 </div>
                 <div className="col-6">
