@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend:/backend
+    ports:
+      - 3030:3030
+    command:
+      sh -c 'npm i && npm start'

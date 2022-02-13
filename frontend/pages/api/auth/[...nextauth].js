@@ -1,6 +1,7 @@
 import NextAuth from "next-auth"
 import axios from "axios"
 import GoogleProvider from "next-auth/providers/google"
+import { getToken } from "next-auth/jwt"
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -22,11 +23,11 @@ export default NextAuth({
     // ...add more providers here
   ],
   pages: {
-      signIn: '/login'
+      signIn: '/accounting'
   },
   callbacks: {
     async jwt({ token, account }) {
-      
+      // console.log(account)
       // Persist the OAuth access_token to the token right after signin
       if (account) {
         token.accessToken = account.access_token
@@ -35,11 +36,12 @@ export default NextAuth({
           refresh_token: account.refresh_token,
           scope: account.scope,
           token_type: account.token_type,
-          expiry_date: account.expires_at
+          expiry_date: account.expires_at,
+          id_token: account.id_token
         }
 
-        axios.post(`${process.env.SERVER_URL}/gmailapi/tokens`, {
-          tokens: payloads
+        axios.post(`${process.env.SERVER_URL}/auth/signin`, {
+          payloads: payloads
         }).then(response => {
           console.log('response', response)
         }).catch(err => {
@@ -49,10 +51,11 @@ export default NextAuth({
       }
       return token
     },
-    async session({ session, token, user, account }) {
-      console.log(account)
+    async session({ session, token }) {
       // Send properties to the client, like an access_token from a provider.
       session.accessToken = token.accessToken
+      // console.log('session', session)
+      // console.log(token, session)
       return session
     }
   }
