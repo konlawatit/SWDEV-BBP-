@@ -13,7 +13,7 @@ import axios from 'axios'
 
 import { useSession, signIn, signOut, getProviders, getCsrfToken } from "next-auth/react"
 
-const SERVER_URL = 'http://localhost:3030'
+const SERVER_URL = 'http://128.199.94.140:3030'
 
 export default function Accounting({file}) {
   const { data: session } = useSession()
@@ -72,7 +72,7 @@ export default function Accounting({file}) {
     } else if (title != "" && amount > 0 && type == "") {
       alert("โปรดเลือกประเภทของรายการ");
     } else if (title != "" && amount > 0 && type != "") {
-        axios.post('http://localhost:3030/accounting/add', {
+        axios.post(`${SERVER_URL}/accounting/add`, {
         title: title,
         date: date,
         amount: amount,
