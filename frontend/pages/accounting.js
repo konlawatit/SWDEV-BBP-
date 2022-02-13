@@ -18,8 +18,13 @@ const SERVER_URL = 'http://localhost:3030'
 export default function Accounting({file}) {
   const { data: session } = useSession()
   const [loginModal, setLoginModal] = useState(false);
+  const [addItemModal, setAddItemModal] = useState(false);
   const loginClose = () => setLoginModal(false);
   const loginShow = () => setLoginModal(true);
+  const addItemModalClose = () => setAddItemModal(false);
+  const addItemModalShow = () => setAddItemModal(true);
+  const [date,setDate] = useState(new Date());
+
   const [accountlist, setAccountlist] = useState([]);
   const [filterAc, setFilterAc] = useState([]);
   const viewIncome = data
@@ -34,7 +39,7 @@ export default function Accounting({file}) {
       console.log('111111111111111111111')
       axios.get(`${SERVER_URL}/accounting/get`, {
         headers: {
-          email: "konlawatit@gmail.com"
+          email: session.user.email
         }
       }).then(response => {
         console.log('response', response)
@@ -47,6 +52,46 @@ export default function Accounting({file}) {
       console.log('no session')
     }
   }, [session])
+
+  const options = [
+    { value: "income", label: "รายรับ" },
+    { value: "expenses", label: "รายจ่าย" },
+  ];
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [amount, setAmount] = useState(0);
+  const [type, setType] = useState("");
+
+  const onSubmit = () => {
+    if (title == "" && amount > 0 && type != "") {
+      alert("โปรดใส่ชื่อรายการ");
+    } else if (title != "" && amount == 0 && type != "") {
+      alert("โปรดใส่จำนวนเงิน");
+    } else if (title != "" && amount <= 0 && type != "") {
+      alert("จำนวนเงินต้องไม่ติด - และมากกว่า 0");
+    } else if (title != "" && amount > 0 && type == "") {
+      alert("โปรดเลือกประเภทของรายการ");
+    } else if (title != "" && amount > 0 && type != "") {
+        axios.post('http://localhost:3030/accounting/add', {
+        title: title,
+        date: date,
+        amount: amount,
+        type: type,
+        description: description,
+        email:session.user.email
+        })
+        .then(function (response) {
+          addItemModalClose();
+          alert("เพิ่มรายการสำเร็จ");
+        })
+        .catch(function (error) {
+        console.log(error);
+        alert("เพิ่มรายการไม่สำเร็จ");
+        });
+      }
+  };
+
+
 
   return (
     <div>
@@ -150,7 +195,9 @@ export default function Accounting({file}) {
               <div className="row mb-2">
                 <div className="col-8"></div>
                 <div className="col-4 text-center mt-5">
-                  <button className="btn btn-dark p-4 text-white" style={{'borderRadius':'40px'}}>
+                  <button className="btn btn-dark p-4 text-white" style={{'borderRadius':'40px'}} 
+                  onClick={addItemModalShow}
+                  >
                     เพิ่มรายการ
                   </button>
                 </div>
@@ -174,6 +221,74 @@ export default function Accounting({file}) {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={loginClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal show={addItemModal} onHide={addItemModalClose} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>บันทึกรายรับ-รายจ่าย</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="text-center">
+        <form>
+            <div className="form-row">
+              <div className="form-group mb-3">
+                <label htmlFor="title">ชื่อรายการ</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="title"
+                  onChange={(e) => setTitle(e.target.value)}
+                  Value={title}
+                />
+              </div>
+            </div>
+            <div className="form-group mb-3">
+              <label htmlFor="description">คำอธิบาย</label>
+              <input
+                type="text"
+                className="form-control"
+                id="description"
+                placeholder="เพิ่มคำอธิบายของคุณเพื่อให้เข้าใจง่ายขึ้น"
+                onChange={(e) => setDescription(e.target.value)}
+                Value={description}
+              />
+            </div>
+            <div className="form-group mb-3">
+              <label htmlFor="amount">จำนวนเงิน (บาท)</label>
+              <input
+                type="int"
+                className="form-control"
+                id="amount"
+                placeholder="100, 500, 1000, ...."
+                onChange={(e) => setAmount(e.target.value)}
+                Value={amount}
+              />
+            </div>
+            <div className="form-row">
+              <div className="form-group col-md-4">
+                <label htmlFor="ac_type">ประเภทรายการ</label>
+                <select
+                  id="ac_type"
+                  className="form-control"
+                  onChange={(e) => setType(e.target.value)}
+                >
+                  <option value={""} selected>
+                    โปรดเลือกประเภท...
+                  </option>
+                  <option value={"income"}>รายรับ</option>
+                  <option value={"expenses"}>รายจ่าย</option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </Modal.Body>
+        <Modal.Footer>
+          <button className="btn btn-success" onClick={onSubmit}>
+                    ยืนยัน
+          </button>
+          <Button variant="danger" onClick={addItemModalClose}>
             Close
           </Button>
         </Modal.Footer>
