@@ -1,4 +1,5 @@
-import Head from 'next/head'
+
+import { useRouter } from 'next/router'
 // import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -7,17 +8,19 @@ import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/rea
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import { fa0, faBank, faChartLine, faChartPie, faFaceRelieved, faMoneyBill, faMoneyBillWave, faWallet } from '@fortawesome/free-solid-svg-icons'
 export default function NavTab() {
+    const router = useRouter()
   return (
     <SideNav className='bg-secondary' 
     onSelect={(selected) => {
-        // Add your code here
+        router.push('/'+selected)
     }}
 >
     <SideNav.Toggle />
-    <SideNav.Nav defaultSelected="dashboard">
-        <NavItem eventKey="dashboard">
+    <SideNav.Nav defaultSelected="">
+        <NavItem eventKey="">
             <NavIcon>
                 <FontAwesomeIcon icon={faChartPie} className="text-white"/>
             </NavIcon>
