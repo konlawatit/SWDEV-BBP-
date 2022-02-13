@@ -16,8 +16,8 @@ export default function Accounting() {
   const viewExpenses = data.filter((item)=>item.ac_type === "expenses").map((data)=>data);
   return (
     <div>
-      <NavTab></NavTab>
       <div className="container mt-3" style={{ marginLeft: "10%" }}>
+      <NavTab></NavTab>
         <div className="row">
           <div className="col-6">
             <div className="d-flex justify-content-start">
