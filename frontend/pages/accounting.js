@@ -13,34 +13,41 @@ import axios from 'axios'
 
 import { useSession, signIn, signOut, getProviders, getCsrfToken } from "next-auth/react"
 
-const clientId = '1027123282693-9ogb4r62q7ojg8t5tasqnmrfeplaj64f.apps.googleusercontent.com';
+const SERVER_URL = 'http://localhost:3030'
 
 export default function Accounting({file}) {
   const { data: session } = useSession()
-  if (session) {
-    console.log(process.env, session)
-    axios.get(`${process.env.SERVER_URL}/accounting/get`, {
-      headers: {
-        email: "konlawatit@gmail.com"
-      }
-    }).then(response => {
-      console.log('response', response)
-    }).catch(err => {
-      console.log('err', err)
-    })
-  } else {
-    console.log('no session')
-  }
   const [loginModal, setLoginModal] = useState(false);
   const loginClose = () => setLoginModal(false);
   const loginShow = () => setLoginModal(true);
-  const [accountlist, setAccountlist] = useState(data);
+  const [accountlist, setAccountlist] = useState([]);
+  const [filterAc, setFilterAc] = useState([]);
   const viewIncome = data
     .filter((item) => item.ac_type === "income")
     .map((data) => data);
   const viewExpenses = data
     .filter((item) => item.ac_type === "expenses")
     .map((data) => data);
+
+    useEffect(() => {
+    if (session) {
+      console.log('111111111111111111111')
+      axios.get(`${SERVER_URL}/accounting/get`, {
+        headers: {
+          email: "konlawatit@gmail.com"
+        }
+      }).then(response => {
+        console.log('response', response)
+        setAccountlist(response.data)
+        setFilterAc(response.data)
+      }).catch(err => {
+        console.log('err', err)
+      })
+    } else {
+      console.log('no session')
+    }
+  }, [session])
+
   return (
     <div>
       <div className="mt-3" style={{ marginLeft: "10%",marginRight:'10%'}}>
@@ -90,7 +97,11 @@ export default function Accounting({file}) {
               <div className="row mt-3 mb-6">
                 <div className="col-3 text-center btn">
                   <h4
-                    onClick={() => setAccountlist(data)}
+                    // onClick={() => setAccountlist(data)}
+                    onClick={() => {
+                      setFilterAc(accountlist)
+
+                    }}
                     style={{ color: accountlist === data ? "blue" : "black" }}
                   >
                     ทั้งหมด
@@ -98,7 +109,10 @@ export default function Accounting({file}) {
                 </div>
                 <div className="col-3 text-center btn">
                   <h4
-                    onClick={() => setAccountlist(viewIncome)}
+                    onClick={() => {
+                      // accountlist.filter(ac => ac.type === "income")
+                      setFilterAc(accountlist.filter(ac => ac.type === "income"))
+                    }}
                     style={{
                       color: accountlist === viewIncome ? "blue" : "black",
                     }}
@@ -108,7 +122,11 @@ export default function Accounting({file}) {
                 </div>
                 <div className="col-3 text-center btn">
                   <h4
-                    onClick={() => setAccountlist(viewExpenses)}
+                    onClick={() => {
+                      // setAccountlist(viewExpenses)
+                      setFilterAc(accountlist.filter(ac => ac.type === "expenses"))
+
+                    }}
                     style={{
                       color: accountlist === viewExpenses ? "blue" : "black",
                     }}
@@ -124,8 +142,8 @@ export default function Accounting({file}) {
               </div>
               <div className="row" style={{ height: '60vh', overflowY: "scroll" }}>
                 <div className="col">
-                  {accountlist.map((account) => (
-                    <Acctlist key={account.id} {...account} />
+                  {filterAc.map((account) => (
+                    <Acctlist key={account._id} {...account} />
                   ))}
                 </div>
               </div>

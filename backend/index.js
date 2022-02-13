@@ -13,6 +13,8 @@ const gmailAPI = require("./controllers/gmailAPI")
 const accounting = require("./controllers/accounting")
 const auth = require("./controllers/auth")
 
+app.use(cors())
+
 app.use(express.urlencoded({
     extended: false
 }))

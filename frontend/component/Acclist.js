@@ -17,20 +17,21 @@ export const Acctlist = (account) => (
     }}
   >
     <div className="col-8">
-      <h4 style={{ marginTop: 0 }}>{account.ac_title}</h4>
-      {account.ac_date} {account.ac_time}
+      <h4 style={{ marginTop: 0 }}>{account.title}</h4>
+      {console.log(account)}
+      {account.date} {account.ac_time}
     </div>
     <div className="col-4">
       <h4 style={center}>
         <div
           style={{
             border: "1px solid",
-            color: account.ac_type === "expenses" ? "red" : "green",
+            color: account.type === "expenses" ? "red" : "green",
             borderRadius: 10,
             padding: 5,
           }}
         >
-          {account.ac_type == "expenses" ? "รายจ่าย" : "รายรับ"}
+          {account.type == "expenses" ? "รายจ่าย" : "รายรับ"}
         </div>
       </h4>
       <p style={center}>{account.amount} บาท</p>
