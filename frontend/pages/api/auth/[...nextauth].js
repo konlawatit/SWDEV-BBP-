@@ -23,7 +23,7 @@ export default NextAuth({
     // ...add more providers here
   ],
   pages: {
-      signIn: '/login'
+      signIn: '/accounting'
   },
   callbacks: {
     async jwt({ token, account }) {
