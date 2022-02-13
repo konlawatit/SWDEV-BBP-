@@ -112,7 +112,7 @@ router.get("/get/gmail/:bank", async (req, res) => {
           try {
             let messagesList = await gmail.users.messages.list({
               ...gmailOptions,
-              maxResults: 100
+              maxResults: 5
             });
             const messages = messagesList.data.messages;
             console.log(`${messages.length} messages`);
@@ -306,26 +306,36 @@ router.get("/get/gmail/:bank", async (req, res) => {
                       },
                       "ac_list",
                       (res, accounting) => {
-                        accounting.ac_list.push({
-                          title: data.title,
-                          // date: data.date,
-                          date: new Date(parseInt(data.date.split("/")[2]), parseInt(data.date.split("/")[1]), parseInt(data.date.split("/")[0]), data.time.split(":")[0], data.time.split(":")[1], data.time.split(":")[2]),
-                          amount: parseFloat(data.amount),
-                          type: data.type,
-                          description: data.title
-                        });
-                        accounting.save().then(() => {
-                          console.log('save จ้า')
-                        }).catch(err => {
-                          res.send({
-                            error: true
+                        console.log(accounting.ac_list[accounting.ac_list.length - 1])
+                        let acLast = accounting.ac_list[accounting.ac_list.length - 1]
+                        // let lastDate = new Date(parseInt(acLast.date.split("/")[2]), parseInt(acLast.date.split("/")[1]), parseInt(acLast.date.split("/")[0]), acLast.time.split(":")[0], acLast.time.split(":")[1], acLast.time.split(":")[2])
+                        let dataDate = new Date(parseInt(data.date.split("/")[2]), parseInt(data.date.split("/")[1]), parseInt(data.date.split("/")[0]), data.time.split(":")[0], data.time.split(":")[1], data.time.split(":")[2])
+                        console.log('ad last',acLast, dataDate)
+                        console.log(acLast < dataDate)
+                        if (acLast < dataDate ) {
+                          accounting.ac_list.push({
+                            title: data.title,
+                            // date: data.date,
+                            date: new Date(parseInt(data.date.split("/")[2]), parseInt(data.date.split("/")[1]), parseInt(data.date.split("/")[0]), data.time.split(":")[0], data.time.split(":")[1], data.time.split(":")[2]),
+                            amount: parseFloat(data.amount),
+                            type: data.type,
+                            description: data.title
+                          });
+                          accounting.save().then(() => {
+                            console.log('save จ้า')
+                          }).catch(err => {
+                            res.send({
+                              error: true
+                            })
                           })
-                        })
+                        }
+
                       }
                     );
                   })
                   res.send({
-                    result: resFilterNull
+                    result: resFilterNull,
+                    error: false
                     // result: re
                   });
                 }
