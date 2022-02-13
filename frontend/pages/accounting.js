@@ -193,7 +193,33 @@ export default function Accounting({file}) {
                 </div>
               </div>
               <div className="row mb-2">
-                <div className="col-8"></div>
+              <div className="col-8 text-center mt-5">
+                  <button className="btn btn-dark p-4 text-white" style={{'borderRadius':'40px'}}
+                  onClick={() => {
+                    axios.get(`${SERVER_URL}/accounting/get/gmail/krungthai` ,{
+                      headers: {
+                        email: session.user.email
+                      }
+                    }).then(res => {
+                      console.log('success')
+                      axios.get(`${SERVER_URL}/accounting/get`, {
+                        headers: {
+                          email: session.user.email
+                        }
+                      }).then(response => {
+                        console.log('response', response)
+                        setAccountlist(response.data)
+                        setFilterAc(response.data)
+                      }).catch(err => {
+                        console.log('err', err)
+                      })
+                    }).catch(err => {
+                      console.log('err', err)
+                    })
+                  }}>
+                  ดึงข้อมูลการจ่ายเงินจาก Email (ธนาคารกรุงไทย)
+                  </button>
+                </div>
                 <div className="col-4 text-center mt-5">
                   <button className="btn btn-dark p-4 text-white" style={{'borderRadius':'40px'}} 
                   onClick={addItemModalShow}

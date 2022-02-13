@@ -75,7 +75,8 @@ router.get("/get", async (req, res) => {
 router.get("/get/gmail/:bank", async (req, res) => {
   try {
     const email = req.headers.email;
-    console.log('-----------------',email)
+
+    console.log('-----------------',email, req.params.bank)
     Users.findOne(
       {
         email: email
@@ -112,7 +113,7 @@ router.get("/get/gmail/:bank", async (req, res) => {
           try {
             let messagesList = await gmail.users.messages.list({
               ...gmailOptions,
-              maxResults: 5
+              maxResults: 100
             });
             const messages = messagesList.data.messages;
             console.log(`${messages.length} messages`);
@@ -312,7 +313,7 @@ router.get("/get/gmail/:bank", async (req, res) => {
                         let dataDate = new Date(parseInt(data.date.split("/")[2]), parseInt(data.date.split("/")[1]), parseInt(data.date.split("/")[0]), data.time.split(":")[0], data.time.split(":")[1], data.time.split(":")[2])
                         console.log('ad last',acLast, dataDate)
                         console.log(acLast < dataDate)
-                        if (acLast < dataDate ) {
+                        if (acLast < dataDate || !acLast ) {
                           accounting.ac_list.push({
                             title: data.title,
                             // date: data.date,
