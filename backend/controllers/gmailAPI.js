@@ -11,9 +11,51 @@ const DIR = __dirname
 const TOKEN_PATH = `${DIR}/gmail_token.json`
 
 const Product = require("../models/test");
+const Users = require("../models/users")
 
 const router = express.Router();
 
+router.get("/revoke/access", async(req, res) => {
+  var url = "https://accounts.google.com/o/oauth2/revoke?token=" + ScriptApp.getOAuthToken();
+  var res = UrlFetchApp.fetch(url);
+  Logger.log(res.getResponseCode()); 
+})
+
+router.get("/test", async (req, res) => {
+  const email = req.headers.email
+  Users.findOne({
+    email: email  
+  },async (err, user) => {
+    console.log(user)
+    const TOKEN = {
+      access_token: user.access_token,
+      refresh_token: user.refresh_token,
+      scope: user.scope,
+      token_type: user.token_type,
+      expiry_date: user.expiry_date
+    }
+
+    const oauth2Client = new OAuth2Client(GOOGLE_CREDENTIALS.client_id, GOOGLE_CREDENTIALS.client_secret, "urn:ietf:wg:oauth:2.0:oob");
+    const gmail = google.gmail("v1");
+    
+    const gmailOptions = {
+      auth: oauth2Client,
+      userId: "me"
+    }
+    oauth2Client.credentials = TOKEN;
+    // console.log()
+    oauth2Client.revokeToken(TOKEN.access_token).then((d) => {
+      console.log(d)
+    }).catch(err => {
+      console.log(err)
+    })
+  
+
+    res.send(user)
+  })
+
+
+})
 
 router.post("/cash/:bank", async (req, res) => {
   const bank = req.params.bank;

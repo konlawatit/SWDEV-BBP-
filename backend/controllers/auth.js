@@ -4,11 +4,53 @@ const { OAuth2Client } = require("google-auth-library");
 const router = express.Router();
 
 const Users = require("../models/users");
-const Accounting = require("../models/accounting")
+const Accounting = require("../models/accounting");
 
 const GOOGLE_CREDENTIALS = {
-  client_id: process.env.CLIENT_ID
-}
+  client_id: process.env.CLIENT_ID,
+  client_secret: process.env.CLIENT_SECRET
+};
+
+router.post("/revoke", async (req, res) => {
+  try {
+    // if (!scope.split().includes("https://www.googleapis.com/auth/gmail.readonly"))
+    const email = req.body.email;
+    Users.findOne(
+      {
+        email: email
+      },
+      "access_token",
+      (err, user) => {
+        const oauth2Client = new OAuth2Client(
+          GOOGLE_CREDENTIALS.client_id,
+          GOOGLE_CREDENTIALS.client_secret,
+          "urn:ietf:wg:oauth:2.0:oob"
+        );
+        oauth2Client
+          .revokeToken(user.access_token)
+          .then((d) => {
+            console.log("revoke", d);
+            res.send({
+              error: false,
+              message: "revoke success"
+            });
+          })
+          .catch((err) => {
+            console.log("revoke err", err);
+            res.send({
+              error: true,
+              message: "revoke error"
+            });
+          });
+      }
+    );
+  } catch (err) {
+    console.log("revoke err", err);
+    res.send({
+      error: true
+    });
+  }
+});
 
 router.post("/signin", async (req, res) => {
   try {
@@ -24,6 +66,7 @@ router.post("/signin", async (req, res) => {
       expiry_date
     } = req.body.payloads;
     const client = new OAuth2Client(CLIENT_ID);
+
     async function verify() {
       const ticket = await client.verifyIdToken({
         idToken: id_token,
@@ -36,12 +79,13 @@ router.post("/signin", async (req, res) => {
         {
           email: payload.email
         },
-        "access_token refresh_token expiry_date",
+        "access_token refresh_token expiry_date scope",
         (err, userObj) => {
           if (userObj) {
             userObj.access_token = access_token;
             userObj.refresh_token = refresh_token;
             userObj.expiry_date = expiry_date;
+            userObj.scope = scope
             return userObj
               .save()
               .then(() => {
@@ -63,14 +107,14 @@ router.post("/signin", async (req, res) => {
             return user
               .save()
               .then(() => {
-                  let accounting = new Accounting({
-                      user_email: payload.email,
-                      ac_list: []
-                  })
-                  accounting.save().then(() => {
-                      console.log("save user");
-                      res.send("save user successful");
-                  })
+                let accounting = new Accounting({
+                  user_email: payload.email,
+                  ac_list: []
+                });
+                accounting.save().then(() => {
+                  console.log("save user");
+                  res.send("save user successful");
+                });
               })
               .catch((err) => {
                 console.log("err save user", err);
