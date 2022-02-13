@@ -7,8 +7,15 @@ import { Barchart } from "../component/Barchart";
 import { Linechart } from "../component/Linechart";
 import { Acctlist } from "../component/Acclist";
 import data from "../component/accounting.json";
+import {Modal,Button } from 'react-bootstrap'
+import {GoogleLogin} from 'react-google-login';
+
+const clientId = '1027123282693-9ogb4r62q7ojg8t5tasqnmrfeplaj64f.apps.googleusercontent.com';
 
 export default function Accounting() {
+  const [loginModal, setLoginModal] = useState(false);
+  const loginClose = () => setLoginModal(false);
+  const loginShow = () => setLoginModal(true);
   const [accountlist, setAccountlist] = useState(data);
   const viewIncome = data
     .filter((item) => item.ac_type === "income")
@@ -18,7 +25,7 @@ export default function Accounting() {
     .map((data) => data);
   return (
     <div>
-      <div className="container mt-3" style={{ marginLeft: "10%" }}>
+      <div className="mt-3" style={{ marginLeft: "10%",marginRight:'10%'}}>
         <NavTab></NavTab>
         <div className="row">
           <div className="col-6">
@@ -31,13 +38,15 @@ export default function Accounting() {
           </div>
           <div className="col-6">
             <div className="d-flex justify-content-end">
+              <button className="btn" onClick={loginShow}>
               <h4 className="p-2 mt-3">
                 <FontAwesomeIcon
                   icon={faUser}
                   style={{ "padding-right": "10px" }}
                 />
-                ผู้ใช้หมายเลข 1
+                Sign In
               </h4>
+              </button>
             </div>
           </div>
         </div>
@@ -50,9 +59,9 @@ export default function Accounting() {
               <Barchart></Barchart>
             </div>
           </div>
-          <div className="col-5 border border-secondary rounded">
+          <div className="col border border-secondary rounded">
               <div className="row mt-3 mb-6">
-                <div className="col-3">
+                <div className="col-3 text-center btn">
                   <h4
                     onClick={() => setAccountlist(data)}
                     style={{ color: accountlist === data ? "blue" : "black" }}
@@ -60,7 +69,7 @@ export default function Accounting() {
                     ทั้งหมด
                   </h4>
                 </div>
-                <div className="col-3">
+                <div className="col-3 text-center btn">
                   <h4
                     onClick={() => setAccountlist(viewIncome)}
                     style={{
@@ -70,7 +79,7 @@ export default function Accounting() {
                     รายรับ
                   </h4>
                 </div>
-                <div className="col-3">
+                <div className="col-3 text-center btn">
                   <h4
                     onClick={() => setAccountlist(viewExpenses)}
                     style={{
@@ -80,30 +89,49 @@ export default function Accounting() {
                     รายจ่าย
                   </h4>
                 </div>
-                <div className="col-3">
+                <div className="col-3 text-center btn">
                   <h4>
                     <FontAwesomeIcon icon={faCalendar} />
                   </h4>
                 </div>
               </div>
-              <div className="row" style={{ height: 500, overflowY: "scroll" }}>
+              <div className="row" style={{ height: '60vh', overflowY: "scroll" }}>
                 <div className="col">
                   {accountlist.map((account) => (
                     <Acctlist key={account.id} {...account} />
                   ))}
                 </div>
               </div>
-              <div className="row">
+              <div className="row mb-2">
                 <div className="col-8"></div>
-                <div className="col-4">
-                  <button className="button">
-                    <h4>เพิ่มรายการ</h4>
+                <div className="col-4 text-center mt-5">
+                  <button className="btn btn-dark p-4 text-white" style={{'borderRadius':'40px'}}>
+                    เพิ่มรายการ
                   </button>
                 </div>
               </div>
           </div>
         </div>
       </div>
+
+      <Modal show={loginModal} onHide={loginClose} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>เข้าสู่ระบบ</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="text-center">
+          <GoogleLogin
+            clientId={clientId}
+            buttonText="Sign in with google"
+            cookiePolicy={'single_host_origin'}
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={loginClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      
     </div>
   );
 }

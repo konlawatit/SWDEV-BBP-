@@ -27,7 +27,7 @@ export const Acctlist = (account) => (
             border: "1px solid",
             color: account.ac_type === "expenses" ? "red" : "green",
             borderRadius: 10,
-            padding: 3,
+            padding: 5,
           }}
         >
           {account.ac_type == "expenses" ? "รายจ่าย" : "รายรับ"}
