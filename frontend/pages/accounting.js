@@ -9,10 +9,28 @@ import { Acctlist } from "../component/Acclist";
 import data from "../component/accounting.json";
 import {Modal,Button } from 'react-bootstrap'
 import {GoogleLogin} from 'react-google-login';
+import axios from 'axios'
+
+import { useSession, signIn, signOut, getProviders, getCsrfToken } from "next-auth/react"
 
 const clientId = '1027123282693-9ogb4r62q7ojg8t5tasqnmrfeplaj64f.apps.googleusercontent.com';
 
-export default function Accounting() {
+export default function Accounting({file}) {
+  const { data: session } = useSession()
+  if (session) {
+    console.log(process.env, session)
+    axios.get(`${process.env.SERVER_URL}/accounting/get`, {
+      headers: {
+        email: "konlawatit@gmail.com"
+      }
+    }).then(response => {
+      console.log('response', response)
+    }).catch(err => {
+      console.log('err', err)
+    })
+  } else {
+    console.log('no session')
+  }
   const [loginModal, setLoginModal] = useState(false);
   const loginClose = () => setLoginModal(false);
   const loginShow = () => setLoginModal(true);
@@ -38,7 +56,8 @@ export default function Accounting() {
           </div>
           <div className="col-6">
             <div className="d-flex justify-content-end">
-              <button className="btn" onClick={loginShow}>
+              {!session ? 
+              (<button className="btn" onClick={loginShow}>
               <h4 className="p-2 mt-3">
                 <FontAwesomeIcon
                   icon={faUser}
@@ -46,7 +65,15 @@ export default function Accounting() {
                 />
                 Sign In
               </h4>
-              </button>
+              </button>) : (<button className="btn" onClick={loginShow}>
+              <h4 className="p-2 mt-3">
+                <FontAwesomeIcon
+                  icon={faUser}
+                  style={{ "padding-right": "10px" }}
+                />
+                Signed in as {session.user.email}
+              </h4>
+              </button>)}
             </div>
           </div>
         </div>
@@ -119,11 +146,13 @@ export default function Accounting() {
           <Modal.Title>เข้าสู่ระบบ</Modal.Title>
         </Modal.Header>
         <Modal.Body className="text-center">
-          <GoogleLogin
+          {/* <GoogleLogin
             clientId={clientId}
             buttonText="Sign in with google"
             cookiePolicy={'single_host_origin'}
-          />
+          /> */}
+          {session? (<button onClick={() => signOut()}>Sign out</button>) : (<button onClick={() => signIn("google")}>Sign in with Google</button>)}
+          
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={loginClose}>
