@@ -25,19 +25,19 @@ export default function Accounting({file}) {
   const addItemModalShow = () => setAddItemModal(true);
   const [date,setDate] = useState(new Date());
   console.log(process.env)
-  console.log(process)
-  console.log(NEXTAUTH_URL)
-
+  // console.log(NEXTAUTH_URL)
+  
   const [accountlist, setAccountlist] = useState([]);
   const [filterAc, setFilterAc] = useState([]);
   const viewIncome = data
     .filter((item) => item.ac_type === "income")
     .map((data) => data);
-  const viewExpenses = data
+    const viewExpenses = data
     .filter((item) => item.ac_type === "expenses")
     .map((data) => data);
-
+    
     useEffect(() => {
+      console.log(process.env)
     if (session) {
       console.log('111111111111111111111')
       axios.get(`${SERVER_URL}/accounting/get`, {
