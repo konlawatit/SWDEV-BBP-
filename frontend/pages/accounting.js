@@ -25,6 +25,8 @@ export default function Accounting({file}) {
   const addItemModalShow = () => setAddItemModal(true);
   const [date,setDate] = useState(new Date());
   console.log(process.env)
+  console.log(process)
+  console.log(NEXTAUTH_URL)
 
   const [accountlist, setAccountlist] = useState([]);
   const [filterAc, setFilterAc] = useState([]);
