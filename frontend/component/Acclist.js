@@ -5,7 +5,11 @@ const center = {
   "justify-content": "center",
   "align-items": "center",
 };
-export const Acctlist = (account) => (
+export function Acctlist(account){ 
+  var date = new Date(account.date)
+  var time = date.getHours()+":"+date.getMinutes()+" น."
+  date = ("0" + date.getDate()).slice(-2)+"/"+("0" + (date.getMonth()+1)).slice(-2)+"/"+date.getFullYear()
+  return(
   <div
     className="row"
     style={{
@@ -18,8 +22,7 @@ export const Acctlist = (account) => (
   >
     <div className="col-8">
       <h4 style={{ marginTop: 0 }}>{account.title}</h4>
-      {console.log(account)}
-      {account.date} {account.ac_time}
+      วันที่ {date} เวลา {time}
     </div>
     <div className="col-4">
       <h4 style={center}>
@@ -38,3 +41,4 @@ export const Acctlist = (account) => (
     </div>
   </div>
 );
+}
