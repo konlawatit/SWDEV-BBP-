@@ -9,11 +9,13 @@ import { Acctlist } from "../component/Acclist";
 import data from "../component/accounting.json";
 import {Modal,Button } from 'react-bootstrap'
 import {GoogleLogin} from 'react-google-login';
+
 import axios from 'axios'
 
 import { useSession, signIn, signOut, getProviders, getCsrfToken } from "next-auth/react"
 
 const SERVER_URL = 'http://localhost:3030'
+const clientId = '1027123282693-9ogb4r62q7ojg8t5tasqnmrfeplaj64f.apps.googleusercontent.com'
 
 export default function Accounting({file}) {
   const { data: session } = useSession()
@@ -240,11 +242,11 @@ export default function Accounting({file}) {
           <Modal.Title>เข้าสู่ระบบ</Modal.Title>
         </Modal.Header>
         <Modal.Body className="text-center">
-          {/* <GoogleLogin
+          <GoogleLogin
             clientId={clientId}
             buttonText="Sign in with google"
             cookiePolicy={'single_host_origin'}
-          /> */}
+          />
           {session? (<button onClick={() => signOut()}>Sign out</button>) : (<button onClick={() => signIn("google")}>Sign in with Google</button>)}
           
         </Modal.Body>
