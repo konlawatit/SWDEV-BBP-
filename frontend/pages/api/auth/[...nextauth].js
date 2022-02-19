@@ -3,7 +3,10 @@ import axios from "axios"
 import GoogleProvider from "next-auth/providers/google"
 import { getToken } from "next-auth/jwt"
 
+console.log('1', process.env)
+
 export default NextAuth({
+  
   // Configure one or more authentication providers
   providers: [
     GoogleProvider({
