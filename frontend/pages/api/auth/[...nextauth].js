@@ -3,15 +3,15 @@ import axios from "axios"
 import GoogleProvider from "next-auth/providers/google"
 import { getToken } from "next-auth/jwt"
 
-console.log('1', process.env)
+console.log('1', process.envs)
 
 export default NextAuth({
   
   // Configure one or more authentication providers
   providers: [
     GoogleProvider({
-        clientId: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        clientId: "1027123282693-9ogb4r62q7ojg8t5tasqnmrfeplaj64f.apps.googleusercontent.com",
+        clientSecret: "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",
         // authorizationUrl: 'https://accounts.google.com/o/oauth2/v2/auth?prompt=consent&access_type=offline&response_type=code',
         authorization: {
           params: {
