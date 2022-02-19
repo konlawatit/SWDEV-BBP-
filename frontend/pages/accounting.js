@@ -244,7 +244,25 @@ export default function Accounting({file}) {
         <Modal.Body className="text-center">
           <GoogleLogin
             clientId={clientId}
+            accessType="offline"
+            scope="https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/gmail.readonly openid https://www.googleapis.com/auth/userinfo.email"
+            // prompt="consent"
             buttonText="Sign in with google"
+            // accessType="offline"
+            responseType="code"
+            onSuccess={(response) => {
+              console.log('response on success', response)
+              axios.post("http://localhost:3030/auth/code", {
+                code: response.code
+              }).then(res => {
+                console.log('pass', res.data)
+              }).catch(err => {
+                console.log('err', err)
+              })
+            }}
+            onFailure={(response) => {
+              console.log('response on failure', response)
+            }}
             cookiePolicy={'single_host_origin'}
           />
           {session? (<button onClick={() => signOut()}>Sign out</button>) : (<button onClick={() => signIn("google")}>Sign in with Google</button>)}
