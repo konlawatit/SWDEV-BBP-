@@ -132,10 +132,10 @@ export default function Accounting({file}) {
         <div className="row">
           <div className="col-6" style={{marginRight:10}}>
             <div className="row mb-2">
-              <Linechart />
+              <Linechart key={accountlist.id} {...accountlist}/>
             </div>
             <div className="row">
-              <Barchart></Barchart>
+              <Barchart key={accountlist.id} {...accountlist}/>
             </div>
           </div>
           <div className="col border border-secondary rounded">

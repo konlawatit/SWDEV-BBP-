@@ -5,7 +5,7 @@ const center = {
   "justify-content": "center",
   "align-items": "center",
 };
-export function Acctlist(account){ 
+export const Acctlist = (account) => { 
   var date = new Date(account.date)
   var time = date.getHours()+":"+date.getMinutes()+" น."
   date = ("0" + date.getDate()).slice(-2)+"/"+("0" + (date.getMonth()+1)).slice(-2)+"/"+date.getFullYear()
