@@ -15,7 +15,7 @@ require('dotenv').config();
 // const privateKey = fs.readFileSync('server.key')
 // const certificate = fs.readFileSync('server.cert')
 
-const PORT = 3030
+const PORT = process.env.PORT || 3030;
 
 const app = express()
 

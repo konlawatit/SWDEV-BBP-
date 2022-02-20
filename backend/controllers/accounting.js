@@ -13,6 +13,21 @@ const GOOGLE_CREDENTIALS = {
   client_secret: process.env.CLIENT_SECRET
 };
 
+router.get("/test", async (req, res) => {
+  try {
+    res.send({
+      error: false,
+      message: 'pass'
+    })
+  } catch(err) {
+    console.log(err)
+    res.send({
+      error: true,
+      message: err
+    })
+  }
+})
+
 router.post("/add", async (req, res) => {
   try {
     const { title, date, amount, type, description, email } = req.body;
