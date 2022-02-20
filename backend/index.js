@@ -1,4 +1,5 @@
 const express = require("express")
+const compression = require("compression")
 // const forceSSL = require('express-force-ssl');
 var https = require('https');
 const cors = require("cors")
@@ -11,8 +12,8 @@ require('dotenv').config();
 //     ca: fs.readFileSync('./keys/intermediate.crt')
 //   };
 
-const privateKey = fs.readFileSync('server.key')
-const certificate = fs.readFileSync('server.cert')
+// const privateKey = fs.readFileSync('server.key')
+// const certificate = fs.readFileSync('server.cert')
 
 const PORT = 3030
 
@@ -27,6 +28,8 @@ const auth = require("./controllers/auth")
 // var secureServer = https.createServer(ssl_options, app);
 
 app.use(cors())
+
+app.use(compression())
 
 app.use(express.urlencoded({
     extended: false
@@ -55,9 +58,12 @@ for (let route of routes) {
 
 mongoose.connect(mongodbUri).then(result => {
     // secureServer.listen(443)
-    https.createServer({key: privateKey, cert: certificate}, app).listen(PORT, () => {
-        console.log(`Server listening on port ${PORT}`)
-    })
+    // https.createServer({key: privateKey, cert: certificate}, app).listen(PORT, () => {
+    //     console.log(`Server listening on port ${PORT}`)
+    // })
+   app.listen(PORT, () => {
+            console.log(`Server listening on port ${PORT}`)
+        })
 }).catch(err => {
     console.log("Database err", err)
 })
