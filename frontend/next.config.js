@@ -1,6 +1,6 @@
 module.exports = {
   env: {
-    SERVER_URL:"https://128.199.94.140:3030"
+    SERVER_URL:"https://bbp-api.herokuapp.com"
   },
   reactStrictMode: true,
   trailingSlash: true,
