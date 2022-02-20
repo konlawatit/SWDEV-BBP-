@@ -1,7 +1,15 @@
 const express = require("express")
+const forceSSL = require('express-force-ssl');
+var https = require('https');
 const cors = require("cors")
 const mongoose = require("mongoose")
 require('dotenv').config();
+
+let ssl_options = {
+    key: fs.readFileSync('./keys/private.key'),
+    cert: fs.readFileSync('./keys/cert.crt'),
+    ca: fs.readFileSync('./keys/intermediate.crt')
+  };
 
 const PORT = 3030
 
@@ -12,6 +20,8 @@ const mongodbUri = process.env.MONGODB_URI
 const gmailAPI = require("./controllers/gmailAPI")
 const accounting = require("./controllers/accounting")
 const auth = require("./controllers/auth")
+
+var secureServer = https.createServer(ssl_options, app);
 
 app.use(cors())
 
@@ -35,12 +45,13 @@ const routes = [
         target: accounting
     }
 ]
-
+app.use(forceSSL);
 for (let route of routes) {
     app.use(route.prefix, route.target)
 }
 
 mongoose.connect(mongodbUri).then(result => {
+    secureServer.listen(443)
     app.listen(PORT, () => {
         console.log(`Server listening on port ${PORT}`)
     })
