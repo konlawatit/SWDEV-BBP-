@@ -14,8 +14,7 @@ import axios from 'axios'
 
 import { useSession, signIn, signOut, getProviders, getCsrfToken } from "next-auth/react"
 
-const SERVER_URL = 'http://localhost:3030'
-const clientId = '1027123282693-9ogb4r62q7ojg8t5tasqnmrfeplaj64f.apps.googleusercontent.com'
+const SERVER_URL = process.env.SERVER_URL
 
 export default function Accounting({file}) {
   const { data: session } = useSession()
@@ -242,7 +241,7 @@ export default function Accounting({file}) {
           <Modal.Title>เข้าสู่ระบบ</Modal.Title>
         </Modal.Header>
         <Modal.Body className="text-center">
-          <GoogleLogin
+          {/* <GoogleLogin
             clientId={clientId}
             accessType="offline"
             scope="https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/gmail.readonly openid https://www.googleapis.com/auth/userinfo.email"
@@ -264,7 +263,7 @@ export default function Accounting({file}) {
               console.log('response on failure', response)
             }}
             cookiePolicy={'single_host_origin'}
-          />
+          /> */}
           {session? (<button onClick={() => signOut()}>Sign out</button>) : (<button onClick={() => signIn("google")}>Sign in with Google</button>)}
           
         </Modal.Body>
