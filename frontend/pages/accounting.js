@@ -14,7 +14,7 @@ import axios from 'axios'
 
 import { useSession, signIn, signOut, getProviders, getCsrfToken } from "next-auth/react"
 
-const SERVER_URL = process.env.SERVER_URL
+const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL
 
 export default function Accounting({file}) {
   const { data: session } = useSession()
@@ -26,6 +26,7 @@ export default function Accounting({file}) {
   const addItemModalShow = () => setAddItemModal(true);
   const [date,setDate] = useState(new Date());
   console.log(SERVER_URL)
+  // console.log(process.env.NEXT_PUBLIC_TEST)
   // console.log(NEXTAUTH_URL)
   
   const [accountlist, setAccountlist] = useState([]);
