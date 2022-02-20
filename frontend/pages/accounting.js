@@ -14,7 +14,7 @@ import axios from 'axios'
 
 import { useSession, signIn, signOut, getProviders, getCsrfToken } from "next-auth/react"
 
-const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL
+const SERVER_URL = process.env.SERVER_URL
 
 export default function Accounting({file}) {
   const { data: session } = useSession()
@@ -25,11 +25,9 @@ export default function Accounting({file}) {
   const addItemModalClose = () => setAddItemModal(false);
   const addItemModalShow = () => setAddItemModal(true);
   const [date,setDate] = useState(new Date());
-  console.log(SERVER_URL)
-  // console.log(process.env.NEXT_PUBLIC_TEST)
-  // console.log(NEXTAUTH_URL)
   
   const [accountlist, setAccountlist] = useState([]);
+  const sortedAccountlist = accountlist.sort((a, b) => new Date(b.date) - new Date(a.date))
   const [filterAc, setFilterAc] = useState([]);
   const viewIncome = data
     .filter((item) => item.ac_type === "income")
@@ -86,8 +84,22 @@ export default function Accounting({file}) {
         email:session.user.email
         })
         .then(function (response) {
-          addItemModalClose();
-          alert("เพิ่มรายการสำเร็จ");
+          axios.get(`${SERVER_URL}/accounting/get`, {
+            headers: {
+              email: session.user.email
+            }
+          }).then(response => {
+            // console.log('response', response)
+            setAccountlist(response.data)
+            setFilterAc(response.data)
+            addItemModalClose();
+            alert("เพิ่มรายการสำเร็จ");
+          }).catch(err => {
+            addItemModalClose();
+          alert("เพิ่มรายการไม่สำเร็จ");
+            console.log('err', err)
+            
+          })
         })
         .catch(function (error) {
         console.log(error);

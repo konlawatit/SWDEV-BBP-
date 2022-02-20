@@ -14,83 +14,127 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-// const data = [
-//   {
-//     name: 'วันที่ 1',
-//     income: 200,
-//     expense: 150,
-//     amt: 150,
-//   },
-//   {
-//     name: 'วันที่ 2',
-//     income: 200,
-//     expense: 100,
-//     amt: 500,
-//   },
-//   {
-//     name: 'วันที่ 3',
-//     income: 200,
-//     expense: 120,
-//     amt: 500,
-//   },
-//   {
-//     name: 'วันที่ 4',
-//     income: 200,
-//     expense: 180,
-//     amt: 500,
-//   },
-//   {
-//     name: 'วันที่ 5',
-//     income: 200,
-//     expense: 200,
-//     amt: 500,
-//   },
-//   {
-//     name: 'วันที่ 6',
-//     income: 20,
-//     expense: 200 ,
-//     amt: 500,
-//   },
-//   {
-//     name: 'วันนี้',
-//     income: 200,
-//     expense: 150,
-//     amt: 500,
-//   },
-// ];
 
 export const Barchart = (account) => {
-  const [list, setList] = useState(account);
-  const data = [];
-  var date;
+  const thisDate = new Date();
+  const day1 =  new Date(thisDate.getTime()- 24*60*60*1000);
+  const day2 =  new Date(thisDate.getTime()- (24*60*60*1000*2));
+  const day3 =  new Date(thisDate.getTime()- (24*60*60*1000*3));
+  const day4 =  new Date(thisDate.getTime()- (24*60*60*1000*4));
+  const day5 =  new Date(thisDate.getTime()- (24*60*60*1000*5));
+  const day6 =  new Date(thisDate.getTime()- (24*60*60*1000*6));
+  const data = [
+    {
+      name: ("0"+day6.getDate()).slice(-2)+"/"+("0"+(day1.getMonth()+1)).slice(-2),
+      income: 0,
+      expense: 0,
+      amt: 0,
+    },
+    {
+      name: ("0"+day5.getDate()).slice(-2)+"/"+("0"+(day1.getMonth()+1)).slice(-2),
+      income: 0,
+      expense: 0,
+      amt: 2210,
+    },
+    {
+      name: ("0"+day4.getDate()).slice(-2)+"/"+("0"+(day1.getMonth()+1)).slice(-2),
+      income: 0,
+      expense: 0,
+      amt: 2290,
+    },
+    {
+      name: ("0"+day3.getDate()).slice(-2)+"/"+("0"+(day1.getMonth()+1)).slice(-2),
+      income: 0,
+      expense: 0,
+      amt: 2290,
+    },
+    {
+      name: ("0"+day2.getDate()).slice(-2)+"/"+("0"+(day1.getMonth()+1)).slice(-2),
+      income: 0,
+      expense: 0,
+      amt: 2000,
+    },
+    {
+      name: ("0"+day1.getDate()).slice(-2)+"/"+("0"+(day1.getMonth()+1)).slice(-2),
+      income: 0,
+      expense: 0,
+      amt: 2181,
+    },
+    {
+      name: ("0"+thisDate.getDate()).slice(-2)+"/"+("0"+(thisDate.getMonth()+1)).slice(-2),
+      income: 0,
+      expense: 0,
+      amt: 2181,
+    },
+  ]
   Object.values(account).forEach(
-    (val) => (
-      (date = new Date(val.date)),
-      (date =
-        ("0" + date.getDate()).slice(-2) +
-        "/" +
-        ("0" + (date.getMonth() + 1)).slice(-2) +
-        "/" +
-        date.getFullYear()),
-      val.type === "income"
-        ? data.push({
-            income: val.amount,
-            expense: 0,
-            date: date,
-          })
-        : data.push({
-            income: 0,
-            expense: val.amount,
-            date: date,
-          })
-    )
+    (val) => {
+      let checkDate = new Date(val.date).getDate()+new Date(val.date).getMonth()+new Date(val.date).getFullYear()
+      if(checkDate == thisDate.getDate()+thisDate.getMonth()+thisDate.getFullYear()) {
+        if(val.type == 'income'){
+        data[6].income += val.amount
+        }
+        else if(val.type == 'expenses'){
+          data[6].expense += val.amount
+        }
+    }
+    else if(checkDate == day1.getDate()+day1.getMonth()+day1.getFullYear()) {
+      if(val.type == 'income'){
+      data[5].income += val.amount
+      }
+      else if(val.type == 'expenses'){
+        data[5].expense += val.amount
+      }
+  }
+  else if(checkDate == day2.getDate()+day2.getMonth()+day2.getFullYear()) {
+    if(val.type == 'income'){
+    data[4].income += val.amount
+    }
+    else if(val.type == 'expenses'){
+      data[4].expense += val.amount
+    }
+}
+else if(checkDate == day3.getDate()+day3.getMonth()+day3.getFullYear()) {
+  if(val.type == 'income'){
+  data[3].income += val.amount
+  }
+  else if(val.type == 'expenses'){
+    data[3].expense += val.amount
+  }
+}
+else if(checkDate == day4.getDate()+day2.getMonth()+day2.getFullYear()) {
+  if(val.type == 'income'){
+  data[2].income += val.amount
+  }
+  else if(val.type == 'expenses'){
+    data[2].expense += val.amount
+  }
+}
+else if(checkDate == day5.getDate()+day2.getMonth()+day2.getFullYear()) {
+  if(val.type == 'income'){
+  data[1].income += val.amount
+  }
+  else if(val.type == 'expenses'){
+    data[1].expense += val.amount
+  }
+}
+else if(checkDate == day6.getDate()+day2.getMonth()+day2.getFullYear()) {
+  if(val.type == 'income'){
+  data[0].income += val.amount
+  }
+  else if(val.type == 'expenses'){
+    data[0].expense += val.amount
+  }
+}
+    }
   );
+
   
 
   return (
     <div className="border border-secondary rounded" style={{ height: "40vh" }}>
       <div className="d-flex flex-row m-3">
-        <h5>รายรับรายจ่ายรายวันล่าสุด{() => data.push(account)}</h5>
+        <h5>รายรับรายจ่ายรายวัน 7 วันล่าสุด ปี: {thisDate.getFullYear()}</h5>
       </div>
       <ResponsiveContainer width="100%" height="80%">
         <BarChart
@@ -105,7 +149,7 @@ export const Barchart = (account) => {
           }}
         >
           <CartesianGrid strokeDasharray="1" />
-          <XAxis dataKey="date" />
+          <XAxis dataKey="name" />
           <YAxis domain={[0, 1000]} />
           <Tooltip />
           <Legend />
