@@ -25,7 +25,7 @@ export default function Accounting({file}) {
   const addItemModalClose = () => setAddItemModal(false);
   const addItemModalShow = () => setAddItemModal(true);
   const [date,setDate] = useState(new Date());
-  console.log(process.env)
+  console.log(SERVER_URL)
   // console.log(NEXTAUTH_URL)
   
   const [accountlist, setAccountlist] = useState([]);
