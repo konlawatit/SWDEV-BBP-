@@ -8,6 +8,9 @@ const Accounting = require("../models/accounting");
 const Users = require("../models/users");
 const Product = require("../models/test");
 
+//middleware
+const signinWithTest = require("../middleware/signinWithTest");
+
 const GOOGLE_CREDENTIALS = {
   client_id: process.env.CLIENT_ID,
   client_secret: process.env.CLIENT_SECRET
@@ -28,11 +31,11 @@ router.get("/test", async (req, res) => {
   }
 })
 
-router.post("/add", async (req, res) => {
+router.post("/add", signinWithTest, async (req, res) => {
   try {
     const { title, date, amount, type, description, email } = req.body;
 
-    Accounting.findOne(
+     Accounting.findOne(
       {
         user_email: email
       },
@@ -65,10 +68,12 @@ router.post("/add", async (req, res) => {
   }
 });
 
-router.get("/get", async (req, res) => {
+router.get("/get", signinWithTest, async (req, res) => {
   try {
-    console.log(process.env.REDIRECT_URIS);
+    // console.log(process.env.REDIRECT_URIS);
+    // console.log('test', req.test)
     const email = req.headers.email;
+    if (!email) throw("not have email")
     Accounting.findOne(
       {
         user_email: email
@@ -77,6 +82,7 @@ router.get("/get", async (req, res) => {
       (err, accounting) => {
         if (err) throw err;
         else res.send(accounting.ac_list);
+        1645373086
       }
     );
   } catch (err) {
@@ -87,7 +93,7 @@ router.get("/get", async (req, res) => {
   }
 });
 
-router.get("/get/gmail/:bank", async (req, res) => {
+router.get("/get/gmail/:bank", signinWithTest, async (req, res) => {
   try {
     const email = req.headers.email;
 
