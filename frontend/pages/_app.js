@@ -1,3 +1,4 @@
+import { wrapper } from "../redux/store";
 import "../styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 
@@ -9,4 +10,4 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   )
 }
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);
