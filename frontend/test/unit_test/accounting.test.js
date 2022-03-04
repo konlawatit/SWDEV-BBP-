@@ -1,27 +1,31 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
-import client, { Session, useSession } from "next-auth/react";
-import Accounting from "../../pages/accounting";
+import { shallow } from "enzyme";
+
+import NavTab from "../../component/NavTab";
 import "@testing-library/jest-dom";
-jest.mock("next-auth/react");
 
-describe("Accounting Page", () => {
-  it("should sign in modal show", async () => {
-    useSession.mockReturnValueOnce([
-      {
-        user: {
-          email: "foo@bar.com"
-        }
-      },
-      false
-    ]);
+let mockFn = jest.fn();
 
-    render(<Accounting />)
-    const text = document.querySelector('#test1')
-    expect(text).toBeInTheDocument()
-    
-    
-    // screen.getByRole("button", {'name': /sign in/i});
-    // screen.getByLabelText( /sign in/i)
+afterEach(() => {
+  jest.clearAllMocks();
+});
+
+describe("Click accounting Button navigate to '/accounting.js' tests", () => {
+  
+  it("testing Make an Accounting click", async () => {
+    const wrapper = shallow(<NavTab />);
+    // wrapper.find({eventKey: "accounting"}).simulate("click");
+    // console.log(wrapper.find({eventKey: "accounting"}))
+    mockFn.mockResolvedValue("/heetad");
+    await expect(mockFn()).resolves.toEqual("/heetad");
+    await expect(mockFn.mock.calls.length).toBe(1);
   });
+
+  // it("testing 'Start an Assessment' click", async () => {
+  //   const wrapper = shallow(<MainPageModal nextToAssessment={mockFn} />);
+  //   wrapper.find("DarkGrayBut").simulate("click");
+  //   mockFn.mockResolvedValue("/Assessment");
+  //   await expect(mockFn()).resolves.toEqual("/Assessment");
+  //   await expect(mockFn.mock.calls.length).toBe(1);
+  // });
 });
