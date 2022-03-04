@@ -9,6 +9,7 @@ import { Acctlist } from "../component/Acclist";
 import data from "../component/accounting.json";
 import {Modal,Button } from 'react-bootstrap'
 import {GoogleLogin} from 'react-google-login';
+import { connect } from "react-redux";
 
 import axios from 'axios'
 
@@ -16,7 +17,17 @@ import { useSession, signIn, signOut, getProviders, getCsrfToken } from "next-au
 
 const SERVER_URL = process.env.SERVER_URL
 
-export default function Accounting({file}) {
+const mapStateToProps = (state) => ({
+  main: state.main
+});
+
+// const mapDispatchToProps = {
+//   setUser: setUser,
+//   signOut: signOut
+// };
+
+const Accounting = (props, {file}) => {
+
   const { data: session } = useSession()
   const [loginModal, setLoginModal] = useState(false);
   const [addItemModal, setAddItemModal] = useState(false);
@@ -37,7 +48,7 @@ export default function Accounting({file}) {
     .map((data) => data);
     
     useEffect(() => {
-      console.log(process.env)
+
     if (session) {
       console.log('111111111111111111111')
       axios.get(`${SERVER_URL}/accounting/get`, {
@@ -45,7 +56,6 @@ export default function Accounting({file}) {
           email: session.user.email
         }
       }).then(response => {
-        console.log('response', response)
         setAccountlist(response.data)
         setFilterAc(response.data)
       }).catch(err => {
@@ -117,7 +127,7 @@ export default function Accounting({file}) {
         <div className="row">
           <div className="col-6">
             <div className="d-flex justify-content-start">
-              <h1>Accounting</h1>
+              <h1 id="test1">Accounting</h1>
             </div>
             <div className="d-flex flex-column">
               <h5>บัญชีรายรับรายจ่าย</h5>
@@ -126,7 +136,7 @@ export default function Accounting({file}) {
           <div className="col-6">
             <div className="d-flex justify-content-end">
               {!session ? 
-              (<button className="btn" onClick={loginShow}>
+              (<button data-testid="btn-signin" className="btn" onClick={loginShow}>
               <h4 className="p-2 mt-3">
                 <FontAwesomeIcon
                   icon={faUser}
@@ -224,7 +234,6 @@ export default function Accounting({file}) {
                           email: session.user.email
                         }
                       }).then(response => {
-                        console.log('response', response)
                         setAccountlist(response.data)
                         setFilterAc(response.data)
                       }).catch(err => {
@@ -358,3 +367,5 @@ export default function Accounting({file}) {
     </div>
   );
 }
+
+export default Accounting

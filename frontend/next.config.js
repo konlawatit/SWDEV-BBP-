@@ -17,4 +17,5 @@ module.exports = {
       // '/p/deploy-nextjs': { page: '/post', query: { title: 'deploy-nextjs' } },
     }
   },
+  presets: ['@babel/preset-env', '@babel/preset-react'],
 }
