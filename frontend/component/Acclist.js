@@ -21,7 +21,7 @@ export const Acctlist = (account) => {
     }}
   >
     <div className="col-8">
-      <h4 style={{ marginTop: 0 }}>{account.title}</h4>
+      <h4 id="acTitle" style={{ marginTop: 0 }}>{account.title}</h4>
       วันที่ {date} เวลา {time}
     </div>
     <div className="col-4">

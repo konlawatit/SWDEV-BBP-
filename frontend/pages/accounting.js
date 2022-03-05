@@ -28,7 +28,7 @@ const mapStateToProps = (state) => ({
 
 const Accounting = (props, {file}) => {
 
-  const { data: session } = useSession()
+  const { data: session } = ""
   const [loginModal, setLoginModal] = useState(false);
   const [addItemModal, setAddItemModal] = useState(false);
   const loginClose = () => setLoginModal(false);
@@ -136,7 +136,7 @@ const Accounting = (props, {file}) => {
           <div className="col-6">
             <div className="d-flex justify-content-end">
               {!session ? 
-              (<button data-testid="btn-signin" className="btn" onClick={loginShow}>
+              (<button id="btn-signin" className="btn" onClick={loginShow}>
               <h4 className="p-2 mt-3">
                 <FontAwesomeIcon
                   icon={faUser}
@@ -221,7 +221,7 @@ const Accounting = (props, {file}) => {
               </div>
               <div className="row mb-2">
               <div className="col-8 text-center mt-5">
-                  <button className="btn btn-dark p-4 text-white" style={{'borderRadius':'40px'}}
+                  <button className="btn btn-dark p-4 text-white" id="getDataBtn" style={{'borderRadius':'40px'}}
                   onClick={() => {
                     axios.get(`${SERVER_URL}/accounting/get/gmail/krungthai` ,{
                       headers: {
@@ -247,7 +247,7 @@ const Accounting = (props, {file}) => {
                   </button>
                 </div>
                 <div className="col-4 text-center mt-5">
-                  <button className="btn btn-dark p-4 text-white" style={{'borderRadius':'40px'}} 
+                  <button id="additem" className="btn btn-dark p-4 text-white" style={{'borderRadius':'40px'}} 
                   onClick={addItemModalShow}
                   >
                     เพิ่มรายการ
@@ -258,45 +258,21 @@ const Accounting = (props, {file}) => {
         </div>
       </div>
 
-      <Modal show={loginModal} onHide={loginClose} centered>
+      <Modal id="loginModal" show={loginModal} onHide={loginClose} centered>
         <Modal.Header closeButton>
           <Modal.Title>เข้าสู่ระบบ</Modal.Title>
         </Modal.Header>
         <Modal.Body className="text-center">
-          {/* <GoogleLogin
-            clientId={clientId}
-            accessType="offline"
-            scope="https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/gmail.readonly openid https://www.googleapis.com/auth/userinfo.email"
-            // prompt="consent"
-            buttonText="Sign in with google"
-            // accessType="offline"
-            responseType="code"
-            onSuccess={(response) => {
-              console.log('response on success', response)
-              axios.post("http://localhost:3030/auth/code", {
-                code: response.code
-              }).then(res => {
-                console.log('pass', res.data)
-              }).catch(err => {
-                console.log('err', err)
-              })
-            }}
-            onFailure={(response) => {
-              console.log('response on failure', response)
-            }}
-            cookiePolicy={'single_host_origin'}
-          /> */}
           {session? (<button onClick={() => signOut()}>Sign out</button>) : (<button onClick={() => signIn("google")}>Sign in with Google</button>)}
-          
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={loginClose}>
+          <Button id="close" variant="secondary" onClick={loginClose}>
             Close
           </Button>
         </Modal.Footer>
       </Modal>
 
-      <Modal show={addItemModal} onHide={addItemModalClose} centered>
+      <Modal show={addItemModal} onHide={addItemModalClose} centered id="addmodal">
         <Modal.Header closeButton>
           <Modal.Title>บันทึกรายรับ-รายจ่าย</Modal.Title>
         </Modal.Header>
@@ -355,10 +331,10 @@ const Accounting = (props, {file}) => {
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <button className="btn btn-success" onClick={onSubmit}>
+          <button className="btn btn-success"  onClick={onSubmit}>
                     ยืนยัน
           </button>
-          <Button variant="danger" onClick={addItemModalClose}>
+          <Button variant="danger" id="closeAdd" onClick={addItemModalClose}>
             Close
           </Button>
         </Modal.Footer>

@@ -28,7 +28,7 @@ export default function NavTab() {
                 Dashboard
             </NavText>
         </NavItem>
-        <NavItem eventKey="accounting">
+        <NavItem eventKey="accounting" id="testLink">
             <NavIcon>
                 <FontAwesomeIcon icon={faWallet} className="text-white" />
             </NavIcon>
