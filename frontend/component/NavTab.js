@@ -1,5 +1,6 @@
 import React from 'react';
-import { useRouter } from 'next/router'
+import { Router, useRouter } from 'next/router'
+import { useState } from 'react';
 // import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -11,12 +12,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { fa0, faBank, faChartLine, faChartPie, faFaceRelieved, faMoneyBill, faMoneyBillWave, faWallet } from '@fortawesome/free-solid-svg-icons'
 export default function NavTab() {
+    const [link, setLink] = useState("")
     const router = useRouter()
+    const routerTo  = (linkTo) =>{
+        router.push('/'+linkTo)
+    }
+    const setRouter = (path) => {
+        setLink(path)
+    }
   return (
-    <SideNav className='bg-secondary' 
+    <SideNav className='bg-secondary'
     onSelect={(selected) => {
-        router.push('/'+selected)
+        routerTo(selected)
+        setLink(selected)
     }}
+    route={link}
 >
     <SideNav.Toggle />
     <SideNav.Nav defaultSelected="">
@@ -28,7 +38,7 @@ export default function NavTab() {
                 Dashboard
             </NavText>
         </NavItem>
-        <NavItem eventKey="accounting" id="testLink">
+        <NavItem eventKey="accounting" id="testLink" onClick={()=> setRouter("accounting")}>
             <NavIcon>
                 <FontAwesomeIcon icon={faWallet} className="text-white" />
             </NavIcon>
