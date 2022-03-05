@@ -1,0 +1,37 @@
+[
+    {
+        "title": "ค่าบ้าน",
+        "date": "11/02/2022",
+        "type": "expenses",
+        "amount": 8800,
+        "description": "ค่าผ่อนบ้าน งวดที่ 3"
+    },
+    {
+        "title": "ค่าข้าว",
+        "date": "11/02/2022",
+        "type": "expenses",
+        "amount": 100,
+        "description": ""
+    },
+    {
+        "title": "เงินเดือน",
+        "date": "30/01/2022",
+        "type": "income",
+        "amount": 25000,
+        "description": "เงินเดือนของเดือนมกราคม"
+    },
+    {
+        "title": "ค่าน้ำ",
+        "date": "09/02/2022",
+        "type": "expenses",
+        "amount": 207,
+        "description": "ค่าน้ำประปา"
+    },
+    {
+        "title": "ค่าไฟ",
+        "date": "09/02/2022",
+        "type": "expenses",
+        "amount": 1500,
+        "description": "ค่าไฟฟ้า"
+    }
+]
