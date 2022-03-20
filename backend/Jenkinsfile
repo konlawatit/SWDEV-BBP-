@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Pull Code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/konlawatit/SWDEV-BBP-PLUS'
+            }
+        }
+        stage('Download dependency') {
+            steps {
+                sh 'cd backend && npm install'
+            }
+        }
+        stage('Unit Testing') {
+            steps {
+                sh 'cd backend && npm run unit-test'
+            }
+        }
+        stage('Component Testing') {
+            steps {
+                sh 'cd backend && npm run component-test'
+            }
+        }
+        stage('Deployment') {
+            steps {
+                echo '---------------------------- Deployment ----------------------------'
+                // sh ''
+            }
+        }
+    }
+}
