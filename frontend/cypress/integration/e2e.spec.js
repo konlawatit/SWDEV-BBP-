@@ -6,7 +6,8 @@
 // https://on.cypress.io/writing-first-test
 describe('index.js', () => {
     it('loads successfully', () => {
-        cy.visit('http://localhost:3000')
+        // cy.visit('http://localhost:3000')
+        cy.visit('https://bbp-web-dev.herokuapp.com')
     })
     it('go to accouting page', () => {
         cy.get('#testLink').click()
@@ -15,7 +16,8 @@ describe('index.js', () => {
 })
 describe('accounting.js', () => {
     it('loads successfully', () => {
-        cy.visit('http://localhost:3000/accounting')
+        cy.visit('https://bbp-web-dev.herokuapp.com/accounting/')
+        // cy.visit('http://localhost:3000/accounting')
     })
     it("get data without user", ()=>{
         cy.get("#getDataBtn").click()
