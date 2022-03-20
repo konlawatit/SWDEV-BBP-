@@ -11,6 +11,8 @@ const Product = require("../models/test");
 //middleware
 const signinWithTest = require("../middleware/signinWithTest");
 
+const {findOneAccounting, saveAccounting} = require("../repository/accounting")
+
 const GOOGLE_CREDENTIALS = {
   client_id: process.env.CLIENT_ID,
   client_secret: process.env.CLIENT_SECRET
@@ -30,6 +32,7 @@ router.get("/test", async (req, res) => {
     })
   }
 })
+
 
 router.post("/add", signinWithTest, async (req, res) => {
   try {
@@ -70,21 +73,14 @@ router.post("/add", signinWithTest, async (req, res) => {
 
 router.get("/get", signinWithTest, async (req, res) => {
   try {
-    // console.log(process.env.REDIRECT_URIS);
-    // console.log('test', req.test)
     const email = req.headers.email;
     if (!email) throw("not have email")
-    Accounting.findOne(
-      {
-        user_email: email
-      },
-      "ac_list",
-      (err, accounting) => {
-        if (err) throw err;
-        else res.send(accounting.ac_list);
-        1645373086
-      }
-    );
+
+    findOneAccounting(email).then(response => {
+      res.send(response.ac_list)
+    }).catch(err => {
+      res.status(400).send(err)
+    })
   } catch (err) {
     console.log("get accounting", err);
     res.status(500).send({

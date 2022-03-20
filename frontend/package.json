@@ -12,7 +12,7 @@
     "test": "jest",
     "unit-test": "jest --coverage /frontend/test/unit_test",
     "component-test": "jest --coverage /frontend/test/component_test",
-    "e2e-test": "npx cypress run"
+    "e2e-test": "cypress run"
   },
   "dependencies": {
     "@babel/plugin-transform-runtime": "^7.17.0",
