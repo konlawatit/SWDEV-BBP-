@@ -17,14 +17,24 @@ pipeline {
                 sh 'cd backend && npm run unit-test'
             }
         }
-        stage('Component Testing') {
+        stage('Unit Testing Report') {
             steps {
-                sh 'cd backend && npm run component-test'
+                sh 'cd backend && npm run unit-test-report'
             }
         }
-        stage('Deployment') {
+        stage('Component Testing') {
             steps {
-                echo '---------------------------- Deployment ----------------------------'
+                sh 'cd backend && npm run component-test-report'
+            }
+        }
+        stage('Component Testing Report') {
+            steps {
+                sh 'cd backend && npm run component-test-report'
+            }
+        }
+        stage('Create Coverage Report') {
+            steps {
+                echo 'code coverage report'
                 // sh ''
             }
         }
