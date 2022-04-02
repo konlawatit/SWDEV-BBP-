@@ -22,7 +22,7 @@ describe("Accounting", () => {
 
     it("add accounting list and send payload response status 200 OK", async () => {
       // console.log(await request(app))
-      const response = await request(app).post("/accounting/add").send({ title: "test1" , date: new Date() , amount: 100 , type: 'income' , description: '' , email: '62070007@it.kmitl.ac.th'  })    
+      const response = await request(app).post("/accounting/add").send({ title: "test1" , date: new Date() , amount: 200 , type: 'income' , description: '' , email: '62070007@it.kmitl.ac.th'  })    
       expect(response.statusCode).to.equal(200);
     });
 

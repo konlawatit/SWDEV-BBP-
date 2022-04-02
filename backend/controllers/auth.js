@@ -1,15 +1,124 @@
 const express = require("express");
 const { OAuth2Client } = require("google-auth-library");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose");
+var assert = require("assert");
 
 const router = express.Router();
 
+//middleware
+const {verifyToken} = require("../middleware/auth")
+
 const Users = require("../models/users");
 const Accounting = require("../models/accounting");
+
+const secure_key = process.env.SECURE_KEY;
 
 const GOOGLE_CREDENTIALS = {
   client_id: process.env.CLIENT_ID,
   client_secret: process.env.CLIENT_SECRET
 };
+
+router.post("/register", async (req, res) => {
+  try {
+    //get data
+    const { user_name, email, password } = req.body;
+
+    //validate data
+    if (!email && !password) return res.status(400).send("input is required");
+
+    // User exist
+    const userExist = await Users.findOne({ email: email });
+    if (userExist) return res.status(409).send("User already exist");
+
+    //encrypt password
+    const saltRounds = 10;
+    const encryptPassword = await bcrypt.hash(password, saltRounds);
+
+    //create user
+    const user = await Users.create({
+      user_name,
+      email,
+      password: encryptPassword
+    });
+
+    //create accounting for user
+    const accounting = await Accounting.create({
+      user_email: email,
+      ac_list: []
+    });
+
+    //create token
+    const token = jwt.sign(
+      {
+        user_name: user_name,
+        email: email,
+        _id: user._id,
+        _acc_id: accounting._id
+      },
+      secure_key,
+      {
+        expiresIn: "2h"
+      }
+    );
+
+    res.send({ token: token });
+  } catch (err) {
+    console.log(err);
+    res.send(err);
+  }
+});
+
+router.post("/signin", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    //validate data
+    if (!email && !password) return res.status(400).send("input is required");
+
+    //Check user exist
+    const user = await Users.findOne({ email });
+    const accounting = await Accounting.findOne({ email }, "_id");
+
+    //if user or password incorrect
+    if (!user || !(await bcrypt.compare(password, user.password))) return res.status(400).send("email or password is incorrect");
+
+    //create token
+    const token = jwt.sign(
+      {
+        user_name: user.user_name,
+        email: email,
+        _id: user._id,
+        _acc_id: accounting._id
+      },
+      secure_key,
+      {
+        expiresIn: "2h"
+      }
+    );
+    res.send({ token: token });
+  } catch (err) {
+    console.log(err);
+    res.status(501).send(err);
+  }
+});
+
+// router.delete("/del", async (req, res) => {
+//   try {
+//     const delUser = await Users.remove({ email: "test@gmail.com" });
+//     const delAccounting = await Accounting.remove({
+//       user_email: "test@gmail.com"
+//     });
+//     res.send({
+//       user: delUser,
+//       accounting: delAccounting
+//     });
+//   } catch (err) {
+//     console.log(err);
+//     res.status(501).send(err);
+//   }
+// });
 
 router.post("/revoke", async (req, res) => {
   try {
@@ -85,7 +194,7 @@ router.post("/signin", async (req, res) => {
             userObj.access_token = access_token;
             userObj.refresh_token = refresh_token;
             userObj.expiry_date = expiry_date;
-            userObj.scope = scope
+            userObj.scope = scope;
             return userObj
               .save()
               .then(() => {

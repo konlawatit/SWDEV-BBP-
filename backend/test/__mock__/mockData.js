@@ -40,7 +40,7 @@ module.exports = {
         {
           title: "test1",
           date: null,
-          amount: { $numberInt: "200" },
+          amount: 200,
           type: "income",
           description: "none",
           _id: new ObjectId( "620788873df646d05325934d" ),
@@ -48,7 +48,7 @@ module.exports = {
         {
           title: "test2",
           date: null,
-          amount: { $numberInt: "200" },
+          amount: 200,
           type: "income",
           description: "none",
           _id: new ObjectId( "620789443df646d053259351" ),
@@ -56,7 +56,7 @@ module.exports = {
         {
           title: "test2",
           date: null,
-          amount: { $numberInt: "200" },
+          amount: 200,
           type: "income",
           description: "none",
           _id: new ObjectId( "6207c54145f6e7fcfa5a6d81" ),
@@ -64,7 +64,7 @@ module.exports = {
         {
           title: "test2",
           date: null,
-          amount: { $numberInt: "200" },
+          amount: 200,
           type: "income",
           description: "none",
           _id: new ObjectId( "6207cb9060b80046957b85d7" ),
@@ -72,7 +72,7 @@ module.exports = {
         {
           title: "test2",
           date: null,
-          amount: { $numberInt: "200" },
+          amount: 200,
           type: "income",
           description: "none",
           _id: new ObjectId( "6207d00bdc63c2f9c56b001e" ),
@@ -80,7 +80,7 @@ module.exports = {
         {
           title: "ค่าบ้าน",
           date: null,
-          amount: { $numberInt: "8800" },
+          amount: 200,
           type: "expenses",
           description: "ค่าผ่อนบ้าน งวดที่ 3",
           _id: new ObjectId( "6207de31893b35f7663b0d45" ),
@@ -88,39 +88,39 @@ module.exports = {
         {
           title: "test2",
           date: null,
-          amount: { $numberInt: "200" },
+          amount: 200,
           type: "income",
           description: "none",
           _id: new ObjectId( "6207e0c89add39604c72482d" ),
         },
         {
           title: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
-          date: { $date: { $numberLong: "18805366800000" } },
-          amount: { $numberInt: "25" },
+          date: new Date(),
+          amount: 200,
           type: "promptpay",
           description: "promptpay",
           _id: new ObjectId( "62080b7605bfd99951bcffba" ),
         },
         {
           title: "[กรุงไทย] แจ้งผลการโอนเงินสำเร็จ",
-          date: { $date: { $numberLong: "18805366800000" } },
-          amount: { $numberInt: "55" },
+          date: new Date(),
+          amount: 200,
           type: "transfer",
           description: "transfer",
           _id: new ObjectId( "62080b7605bfd99951bcffc3" ),
         },
         {
           title: "[กรุงไทย] แจ้งผลการโอนเงินสำเร็จ",
-          date: { $date: { $numberLong: "18805366800000" } },
-          amount: { $numberInt: "55" },
+          date: new Date(),
+          amount: 200,
           type: "transfer",
           description: "transfer",
           _id: new ObjectId( "62080bd4988dc6b42e090726" ),
         },
         {
           title: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
-          date: { $date: { $numberLong: "18805366800000" } },
-          amount: { $numberInt: "25" },
+          date: new Date(),
+          amount: 200,
           type: "promptpay",
           description: "promptpay",
           _id: new ObjectId( "62080bd4988dc6b42e09071b" ),
@@ -135,7 +135,7 @@ module.exports = {
         {
           title: "[กรุงไทย] แจ้งผลการชำระค่าสินค้าและบริการสำเร็จ",
           date: { $date: { $numberLong: "18782008974000" } },
-          amount: { $numberInt: "20" },
+          amount: 200,
           type: "expenses",
           description: "[กรุงไทย] แจ้งผลการชำระค่าสินค้าและบริการสำเร็จ",
           _id: new ObjectId( "620921d36cb32afed78bcd19" ),
@@ -143,7 +143,7 @@ module.exports = {
         {
           title: "[กรุงไทย] แจ้งผลการชำระค่าสินค้าและบริการสำเร็จ",
           date: { $date: { $numberLong: "18782003172000" } },
-          amount: { $numberInt: "45" },
+          amount: 200,
           type: "expenses",
           description: "[กรุงไทย] แจ้งผลการชำระค่าสินค้าและบริการสำเร็จ",
           _id: new ObjectId( "620921d36cb32afed78bcd1b" ),
@@ -151,7 +151,7 @@ module.exports = {
         {
           title: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           date: { $date: { $numberLong: "18781914269000" } },
-          amount: { $numberInt: "80" },
+          amount: 200,
           type: "expenses",
           description: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           _id: new ObjectId( "620921d36cb32afed78bcd15" ),
@@ -159,7 +159,7 @@ module.exports = {
         {
           title: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           date: { $date: { $numberLong: "18782026077000" } },
-          amount: { $numberInt: "74" },
+          amount: 200,
           type: "expenses",
           description: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           _id: new ObjectId( "620921d36cb32afed78bcd1d" ),
@@ -167,7 +167,7 @@ module.exports = {
         {
           title: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           date: { $date: { $numberLong: "18781939145000" } },
-          amount: { $numberInt: "79" },
+          amount: 200,
           type: "expenses",
           description: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           _id: new ObjectId( "620921d36cb32afed78bcd17" ),
@@ -175,7 +175,7 @@ module.exports = {
         {
           title: "[กรุงไทย] แจ้งผลการโอนเงินสำเร็จ",
           date: { $date: { $numberLong: "18781874772000" } },
-          amount: { $numberInt: "50" },
+          amount: 200,
           type: "expenses",
           description: "[กรุงไทย] แจ้งผลการโอนเงินสำเร็จ",
           _id: new ObjectId( "620921d36cb32afed78bcd13" ),
@@ -183,7 +183,7 @@ module.exports = {
         {
           title: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           date: { $date: { $numberLong: "18782090083000" } },
-          amount: { $numberInt: "285" },
+          amount: 200,
           type: "expenses",
           description: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           _id: new ObjectId( "620921d36cb32afed78bcd23" ),
@@ -191,7 +191,7 @@ module.exports = {
         {
           title: "[กรุงไทย] แจ้งผลการเติมเงินสำเร็จ",
           date: { $date: { $numberLong: "18782089193000" } },
-          amount: { $numberInt: "200" },
+          amount: 200,
           type: "expenses",
           description: "[กรุงไทย] แจ้งผลการเติมเงินสำเร็จ",
           _id: new ObjectId( "620921d36cb32afed78bcd21" ),
@@ -199,7 +199,7 @@ module.exports = {
         {
           title: "[กรุงไทย] แจ้งผลการชำระค่าสินค้าและบริการสำเร็จ",
           date: { $date: { $numberLong: "18782088947000" } },
-          amount: { $numberInt: "50" },
+          amount: 200,
           type: "expenses",
           description: "[กรุงไทย] แจ้งผลการชำระค่าสินค้าและบริการสำเร็จ",
           _id: new ObjectId( "620921d36cb32afed78bcd1f" ),
@@ -207,7 +207,7 @@ module.exports = {
         {
           title: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           date: { $date: { $numberLong: "18782102513000" } },
-          amount: { $numberInt: "42" },
+          amount: 200,
           type: "expenses",
           description: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           _id: new ObjectId( "620921d46cb32afed78bcd25" ),
@@ -215,7 +215,7 @@ module.exports = {
         {
           title: "[กรุงไทย] แจ้งผลการชำระค่าสินค้าและบริการสำเร็จ",
           date: { $date: { $numberLong: "18782117348000" } },
-          amount: { $numberInt: "45" },
+          amount: 200,
           type: "expenses",
           description: "[กรุงไทย] แจ้งผลการชำระค่าสินค้าและบริการสำเร็จ",
           _id: new ObjectId( "620921d46cb32afed78bcd27" ),
@@ -223,7 +223,7 @@ module.exports = {
         {
           title: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           date: { $date: { $numberLong: "18782115587000" } },
-          amount: { $numberInt: "30" },
+          amount: 200,
           type: "expenses",
           description: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           _id: new ObjectId( "620921d46cb32afed78bcd29" ),
@@ -231,7 +231,7 @@ module.exports = {
         {
           title: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           date: { $date: { $numberLong: "18782193225000" } },
-          amount: { $numberInt: "40" },
+          amount: 200,
           type: "expenses",
           description: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           _id: new ObjectId( "620921d46cb32afed78bcd2b" ),
@@ -239,7 +239,7 @@ module.exports = {
         {
           title: "[กรุงไทย] แจ้งผลการชำระค่าสินค้าและบริการสำเร็จ",
           date: { $date: { $numberLong: "18782258329000" } },
-          amount: { $numberInt: "55" },
+          amount: 200,
           type: "expenses",
           description: "[กรุงไทย] แจ้งผลการชำระค่าสินค้าและบริการสำเร็จ",
           _id: new ObjectId( "620921d46cb32afed78bcd2d" ),
@@ -247,7 +247,7 @@ module.exports = {
         {
           title: "[กรุงไทย] แจ้งผลการชำระค่าสินค้าและบริการสำเร็จ",
           date: { $date: { $numberLong: "18782283941000" } },
-          amount: { $numberInt: "234" },
+          amount: 200,
           type: "expenses",
           description: "[กรุงไทย] แจ้งผลการชำระค่าสินค้าและบริการสำเร็จ",
           _id: new ObjectId( "620921d46cb32afed78bcd2f" ),
@@ -255,7 +255,7 @@ module.exports = {
         {
           title: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           date: { $date: { $numberLong: "18782431517000" } },
-          amount: { $numberInt: "45" },
+          amount: 200,
           type: "expenses",
           description: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           _id: new ObjectId( "620921d46cb32afed78bcd33" ),
@@ -263,7 +263,7 @@ module.exports = {
         {
           title: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           date: { $date: { $numberLong: "18782374701000" } },
-          amount: { $numberInt: "29" },
+          amount: 200,
           type: "expenses",
           description: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           _id: new ObjectId( "620921d46cb32afed78bcd37" ),
@@ -271,7 +271,7 @@ module.exports = {
         {
           title: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           date: { $date: { $numberLong: "18782374154000" } },
-          amount: { $numberInt: "50" },
+          amount: 200,
           type: "expenses",
           description: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           _id: new ObjectId( "620921d46cb32afed78bcd35" ),
@@ -279,7 +279,7 @@ module.exports = {
         {
           title: "[กรุงไทย] แจ้งผลการโอนเงินสำเร็จ",
           date: { $date: { $numberLong: "18782349844000" } },
-          amount: { $numberInt: "34" },
+          amount: 200,
           type: "expenses",
           description: "[กรุงไทย] แจ้งผลการโอนเงินสำเร็จ",
           _id: new ObjectId( "620921d46cb32afed78bcd31" ),
@@ -287,7 +287,7 @@ module.exports = {
         {
           title: "[กรุงไทย] แจ้งผลการชำระค่าสินค้าและบริการสำเร็จ",
           date: { $date: { $numberLong: "18782343226000" } },
-          amount: { $numberInt: "35" },
+          amount: 200,
           type: "expenses",
           description: "[กรุงไทย] แจ้งผลการชำระค่าสินค้าและบริการสำเร็จ",
           _id: new ObjectId( "620921d46cb32afed78bcd39" ),
@@ -295,7 +295,7 @@ module.exports = {
         {
           title: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           date: { $date: { $numberLong: "18782458333000" } },
-          amount: { $numberInt: "30" },
+          amount: 200,
           type: "expenses",
           description: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           _id: new ObjectId( "620921d46cb32afed78bcd3d" ),
@@ -303,7 +303,7 @@ module.exports = {
         {
           title: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           date: { $date: { $numberLong: "18782451079000" } },
-          amount: { $numberInt: "45" },
+          amount: 200,
           type: "expenses",
           description: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           _id: new ObjectId( "620921d46cb32afed78bcd3b" ),
@@ -311,7 +311,7 @@ module.exports = {
         {
           title: "[กรุงไทย] แจ้งผลการโอนเงินสำเร็จ",
           date: { $date: { $numberLong: "18782541861000" } },
-          amount: { $numberInt: "55" },
+          amount: 200,
           type: "expenses",
           description: "[กรุงไทย] แจ้งผลการโอนเงินสำเร็จ",
           _id: new ObjectId( "620921d46cb32afed78bcd41" ),
@@ -319,7 +319,7 @@ module.exports = {
         {
           title: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           date: { $date: { $numberLong: "18782542215000" } },
-          amount: { $numberInt: "25" },
+          amount: 200,
           type: "expenses",
           description: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           _id: new ObjectId( "620921d46cb32afed78bcd43" ),
@@ -327,7 +327,7 @@ module.exports = {
         {
           title: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           date: { $date: { $numberLong: "18782459959000" } },
-          amount: { $numberInt: "68" },
+          amount: 200,
           type: "expenses",
           description: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           _id: new ObjectId( "620921d46cb32afed78bcd3f" ),
@@ -335,7 +335,7 @@ module.exports = {
         {
           title: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           date: { $date: { $numberLong: "18782603310000" } },
-          amount: { $numberInt: "70" },
+          amount: 200,
           type: "expenses",
           description: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           _id: new ObjectId( "620921d46cb32afed78bcd47" ),
@@ -343,7 +343,7 @@ module.exports = {
         {
           title: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           date: { $date: { $numberLong: "18782634966000" } },
-          amount: { $numberInt: "60" },
+          amount: 200,
           type: "expenses",
           description: "[กรุงไทย] แจ้งผลการโอนเงินพร้อมเพย์สำเร็จ",
           _id: new ObjectId( "620921d56cb32afed78bcd49" ),
@@ -351,7 +351,7 @@ module.exports = {
         {
           title: "[กรุงไทย] แจ้งผลการชำระค่าสินค้าและบริการสำเร็จ",
           date: { $date: { $numberLong: "18782524221000" } },
-          amount: { $numberInt: "60" },
+          amount: 200,
           type: "expenses",
           description: "[กรุงไทย] แจ้งผลการชำระค่าสินค้าและบริการสำเร็จ",
           _id: new ObjectId( "620921d46cb32afed78bcd45" ),
@@ -359,7 +359,7 @@ module.exports = {
         {
           title: "เงินเดือน",
           date: { $date: { $numberLong: "1644765689930" } },
-          amount: { $numberInt: "3000" },
+          amount: 200,
           type: "income",
           description: "เงินประจำเดือน",
           _id: new ObjectId( "6209224c6cb32afed78bcdbf" ),
@@ -367,7 +367,7 @@ module.exports = {
         {
           title: "เล่นเกม",
           date: { $date: { $numberLong: "1645368383824" } },
-          amount: { $numberInt: "12" },
+          amount: 200,
           type: "expenses",
           description: "1",
           _id: new ObjectId( "6212544d9a3e64b30ba6b08d" ),
@@ -375,7 +375,7 @@ module.exports = {
         {
           title: "23",
           date: { $date: { $numberLong: "1645368414772" } },
-          amount: { $numberInt: "2" },
+          amount: 200,
           type: "income",
           description: "4",
           _id: new ObjectId( "6212546e9a3e64b30ba6b0cd" ),
@@ -383,7 +383,7 @@ module.exports = {
         {
           title: "231",
           date: { $date: { $numberLong: "1645368414772" } },
-          amount: { $numberInt: "2" },
+          amount: 200,
           type: "income",
           description: "4",
           _id: new ObjectId( "621254a19a3e64b30ba6b12f" ),
@@ -391,7 +391,7 @@ module.exports = {
         {
           title: "test2",
           date: null,
-          amount: { $numberInt: "200" },
+          amount: 200,
           type: "expenses",
           description: "none",
           _id: new ObjectId( "621b50b909db281e328c7fab" ),
@@ -399,7 +399,7 @@ module.exports = {
         {
           title: "xfcvdcxvdfc",
           date: { $date: { $numberLong: "1646222022859" } },
-          amount: { $numberInt: "100" },
+          amount: 200,
           type: "expenses",
           description: "zxcvzxc",
           _id: new ObjectId( "621f5d2248626f0b4b33e96f" ),
@@ -407,7 +407,7 @@ module.exports = {
         {
           title: "test2",
           date: null,
-          amount: { $numberInt: "200" },
+          amount: 200,
           type: "expenses",
           description: "none",
           _id: new ObjectId( "621f609ab62cbcf7c5226fff" ),

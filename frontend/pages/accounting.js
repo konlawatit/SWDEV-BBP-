@@ -13,8 +13,6 @@ import { connect } from "react-redux";
 
 import axios from 'axios'
 
-import { useSession, signIn, signOut, getProviders, getCsrfToken } from "next-auth/react"
-
 const SERVER_URL = process.env.SERVER_URL
 
 const mapStateToProps = (state) => ({
@@ -28,7 +26,7 @@ const mapStateToProps = (state) => ({
 
 const Accounting = (props, {file}) => {
 
-  const { data: session } = ""
+  const session  = ""
   const [loginModal, setLoginModal] = useState(false);
   const [addItemModal, setAddItemModal] = useState(false);
   const loginClose = () => setLoginModal(false);
@@ -47,24 +45,23 @@ const Accounting = (props, {file}) => {
     .filter((item) => item.ac_type === "expenses")
     .map((data) => data);
     
-    useEffect(() => {
+    // useEffect(() => {
 
-    if (session) {
-      console.log('111111111111111111111')
-      axios.get(`${SERVER_URL}/accounting/get`, {
-        headers: {
-          email: session.user.email
-        }
-      }).then(response => {
-        setAccountlist(response.data)
-        setFilterAc(response.data)
-      }).catch(err => {
-        console.log('err', err)
-      })
-    } else {
-      console.log('no session')
-    }
-  }, [session])
+  //   if (session) {
+  //     axios.get(`${SERVER_URL}/accounting/get`, {
+  //       headers: {
+  //         email: session.user.email
+  //       }
+  //     }).then(response => {
+  //       setAccountlist(response.data)
+  //       setFilterAc(response.data)
+  //     }).catch(err => {
+  //       console.log('err', err)
+  //     })
+  //   } else {
+  //     console.log('no session')
+  //   }
+  // }, [session])
 
   const options = [
     { value: "income", label: "รายรับ" },
@@ -85,36 +82,36 @@ const Accounting = (props, {file}) => {
     } else if (title != "" && amount > 0 && type == "") {
       alert("โปรดเลือกประเภทของรายการ");
     } else if (title != "" && amount > 0 && type != "") {
-        axios.post(`${SERVER_URL}/accounting/add`, {
-        title: title,
-        date: date,
-        amount: amount,
-        type: type,
-        description: description,
-        email:session.user.email
-        })
-        .then(function (response) {
-          axios.get(`${SERVER_URL}/accounting/get`, {
-            headers: {
-              email: session.user.email
-            }
-          }).then(response => {
-            // console.log('response', response)
-            setAccountlist(response.data)
-            setFilterAc(response.data)
-            addItemModalClose();
-            alert("เพิ่มรายการสำเร็จ");
-          }).catch(err => {
-            addItemModalClose();
-          alert("เพิ่มรายการไม่สำเร็จ");
-            console.log('err', err)
+        // axios.post(`${SERVER_URL}/accounting/add`, {
+        // title: title,
+        // date: date,
+        // amount: amount,
+        // type: type,
+        // description: description,
+        // email:session.user.email
+        // })
+        // .then(function (response) {
+        //   axios.get(`${SERVER_URL}/accounting/get`, {
+        //     headers: {
+        //       email: session.user.email
+        //     }
+        //   }).then(response => {
+        //     // console.log('response', response)
+        //     setAccountlist(response.data)
+        //     setFilterAc(response.data)
+        //     addItemModalClose();
+        //     alert("เพิ่มรายการสำเร็จ");
+        //   }).catch(err => {
+        //     addItemModalClose();
+        //   alert("เพิ่มรายการไม่สำเร็จ");
+        //     console.log('err', err)
             
-          })
-        })
-        .catch(function (error) {
-        console.log(error);
-        alert("เพิ่มรายการไม่สำเร็จ");
-        });
+        //   })
+        // })
+        // .catch(function (error) {
+        // console.log(error);
+        // alert("เพิ่มรายการไม่สำเร็จ");
+        // });
       }
   };
 
@@ -220,32 +217,6 @@ const Accounting = (props, {file}) => {
                 </div>
               </div>
               <div className="row mb-2">
-              <div className="col-8 text-center mt-5">
-                  <button className="btn btn-dark p-4 text-white" id="getDataBtn" style={{'borderRadius':'40px'}}
-                  onClick={() => {
-                    axios.get(`${SERVER_URL}/accounting/get/gmail/krungthai` ,{
-                      headers: {
-                        email: session.user.email
-                      }
-                    }).then(res => {
-                      console.log('success')
-                      axios.get(`${SERVER_URL}/accounting/get`, {
-                        headers: {
-                          email: session.user.email
-                        }
-                      }).then(response => {
-                        setAccountlist(response.data)
-                        setFilterAc(response.data)
-                      }).catch(err => {
-                        console.log('err', err)
-                      })
-                    }).catch(err => {
-                      console.log('err', err)
-                    })
-                  }}>
-                  ดึงข้อมูลการจ่ายเงินจาก Email (ธนาคารกรุงไทย)
-                  </button>
-                </div>
                 <div className="col-4 text-center mt-5">
                   <button id="additem" className="btn btn-dark p-4 text-white" style={{'borderRadius':'40px'}} 
                   onClick={addItemModalShow}
@@ -263,7 +234,7 @@ const Accounting = (props, {file}) => {
           <Modal.Title>เข้าสู่ระบบ</Modal.Title>
         </Modal.Header>
         <Modal.Body className="text-center">
-          {session? (<button onClick={() => signOut()}>Sign out</button>) : (<button onClick={() => signIn("google")}>Sign in with Google</button>)}
+          <button >Sign in with Google</button>
         </Modal.Body>
         <Modal.Footer>
           <Button id="close" variant="secondary" onClick={loginClose}>
