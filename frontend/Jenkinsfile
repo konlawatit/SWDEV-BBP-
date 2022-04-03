@@ -17,9 +17,19 @@ pipeline {
                 sh 'cd frontend && npm run unit-test'
             }
         }
+        stage('Unit Testing Report') {
+            steps {
+                sh 'cd frontend && npm run unit-test-report'
+            }
+        }
         stage('Component Testing') {
             steps {
                 sh 'cd frontend && npm run component-test'
+            }
+        }
+        stage('Component Testing Report') {
+            steps {
+                sh 'cd frontend && npm run component-test-report'
             }
         }
         stage('End-To-End Testing') {
