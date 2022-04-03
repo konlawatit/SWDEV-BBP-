@@ -51,7 +51,7 @@ pipeline {
                         allowMissing: false,
                         alwaysLinkToLastBuild: false,
                         keepAll: true,
-                        reportDir: './coverage/lcov-report',
+                        reportDir: './frontend/coverage/lcov-report',
                         reportFiles: 'index.html',
                         reportName: 'Component Test Coverage Report'
                     ]
