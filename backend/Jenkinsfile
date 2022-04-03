@@ -20,7 +20,6 @@ pipeline {
         stage('Unit Testing Report') {
             steps {
                 sh 'cd backend && npm run unit-test-report'
-                sh 'npm run test:db'
                     publishHTML target: [
                         allowMissing: false,
                         alwaysLinkToLastBuild: false,
@@ -39,7 +38,7 @@ pipeline {
         stage('Component Testing Report') {
             steps {
                 sh 'cd backend && npm run component-test-report'
-               publishHTML target: [
+                publishHTML target: [
                         allowMissing: false,
                         alwaysLinkToLastBuild: false,
                         keepAll: true,
