@@ -20,7 +20,15 @@ pipeline {
         stage('Unit Testing Report') {
             steps {
                 sh 'cd backend && npm run unit-test-report'
-
+                sh 'npm run test:db'
+                    publishHTML target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: "./coverage",
+                        reportFiles: "index.html",
+                        reportName: 'Unit Test Coverage Report'
+                    ]
             }
         }
         stage('Component Testing') {
@@ -31,7 +39,14 @@ pipeline {
         stage('Component Testing Report') {
             steps {
                 sh 'cd backend && npm run component-test-report'
-               
+               publishHTML target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: "./coverage",
+                        reportFiles: "index.html",
+                        reportName: 'Component Test Coverage Report'
+                    ]
             }
         
 
@@ -40,9 +55,9 @@ pipeline {
             steps {
                 echo 'code coverage report'
                 // sh ''
-                clover(cloverReportDir: './backend/coverage', cloverReportFileName: 'clover.xml',
+                clover(cloverReportDir: 'backend/coverage', cloverReportFileName: 'clover.xml',
                     healthyTarget: [methodCoverage: 70, conditionalCoverage: 80, statementCoverage: 80],
-                    unhealthyTarget: [methodCoverage: 40, conditionalCoverage: 50, statementCoverage: 50],
+                    unhealthyTarget: [methodCoverage: 50, conditionalCoverage: 50, statementCoverage: 50],
                     failingTarget: [methodCoverage: 0, conditionalCoverage: 0, statementCoverage: 0]
                 )
             }
