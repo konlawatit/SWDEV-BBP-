@@ -47,6 +47,16 @@ pipeline {
         stage('Component Testing Report') {
             steps {
                 sh 'cd frontend && npm run component-test-report'
+                publishHTML target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: './coverage/lcov-report',
+                        reportFiles: 'index.html',
+                        reportName: 'Component Test Coverage Report'
+                    ]
+
+        
             }
         }
         stage('End-To-End Testing') {
