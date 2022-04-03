@@ -1,7 +1,12 @@
-FROM node:16
+FROM node:16.13.0-alpine
 
-WORKDIR /backend
+WORKDIR /usr/app/backend
 
-COPY . /backend
+COPY ./package.json .
 
-EXPOSE 3030
+RUN yarn install
+
+COPY . .
+
+CMD ["yarn", "run", "start"]
+
