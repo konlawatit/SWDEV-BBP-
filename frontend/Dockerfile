@@ -1,5 +1,7 @@
 FROM node:16.13.0-alpine
 
+ENV PORT=3000
+
 WORKDIR /usr/app/frontend
 
 # Install PM2 globally
