@@ -17,9 +17,46 @@ pipeline {
                 sh 'cd frontend && npm run unit-test'
             }
         }
+        stage('Unit Testing Report') {
+            steps {
+                sh 'cd frontend && npm run unit-test-report'
+                publishHTML target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: "./frontend/coverage/lcov-report",
+                        reportFiles: "index.html",
+                        reportName: 'Unit Test Coverage Report'
+                    ]
+
+                    publishHTML target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: "./frontend/coverage",
+                        reportFiles: "report.html",
+                        reportName: 'Unit Test Report'
+                    ]
+            }
+        }
         stage('Component Testing') {
             steps {
                 sh 'cd frontend && npm run component-test'
+            }
+        }
+        stage('Component Testing Report') {
+            steps {
+                sh 'cd frontend && npm run component-test-report'
+                publishHTML target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: true,
+                        reportDir: './frontend/coverage/lcov-report',
+                        reportFiles: 'index.html',
+                        reportName: 'Component Test Coverage Report'
+                    ]
+
+        
             }
         }
         stage('End-To-End Testing') {

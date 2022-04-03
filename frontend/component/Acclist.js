@@ -2,8 +2,8 @@ import React from "react";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 const center = {
   display: "flex",
-  "justify-content": "center",
-  "align-items": "center",
+  "justifyContent": "center",
+  "alignItems": "center",
 };
 export const Acctlist = (account) => { 
   var date = new Date(account.date)

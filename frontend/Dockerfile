@@ -1,4 +1,4 @@
-FROM node:16.14-alpine
+FROM node:16.13.0-alpine
 
 WORKDIR /usr/app/frontend
 
@@ -14,7 +14,5 @@ RUN yarn install
 COPY . .
 
 RUN yarn run build
-
-EXPOSE 3000
 
 CMD ["npm", "start"]

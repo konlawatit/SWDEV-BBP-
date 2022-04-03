@@ -19,8 +19,4 @@ describe('accounting.js', () => {
         cy.visit('https://bbp-web-dev.herokuapp.com/accounting/')
         // cy.visit('http://localhost:3000/accounting')
     })
-    it("get data without user", ()=>{
-        cy.get("#getDataBtn").click()
-    })
-
 })

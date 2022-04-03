@@ -6,5 +6,17 @@ module.exports = {
           '<rootDir>/test/fileMock.js',
         '\\.(css|less)$': '<rootDir>/test/styleMock.js',
       },
-      
+    globals: {
+      window: {},
+    },
+    reporters: [
+      "default",
+      [
+        "./node_modules/jest-html-reporter",
+        {
+          pageTitle: "Unit Test Report",
+          outputPath: "./frontend/coverage/report.html",
+        },
+      ],
+    ],
   };
