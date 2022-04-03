@@ -20,14 +20,6 @@ pipeline {
         stage('Unit Testing Report') {
             steps {
                 sh 'cd backend && npm run unit-test-report'
-                    publishHTML target: [
-                        allowMissing: false,
-                        alwaysLinkToLastBuild: false,
-                        keepAll: true,
-                        reportDir: "./coverage",
-                        reportFiles: "index.html",
-                        reportName: 'Unit Test Coverage Report'
-                    ]
             }
         }
         stage('Component Testing') {
@@ -38,14 +30,6 @@ pipeline {
         stage('Component Testing Report') {
             steps {
                 sh 'cd backend && npm run component-test-report'
-                publishHTML target: [
-                        allowMissing: false,
-                        alwaysLinkToLastBuild: false,
-                        keepAll: true,
-                        reportDir: "./coverage",
-                        reportFiles: "index.html",
-                        reportName: 'Component Test Coverage Report'
-                    ]
             }
         
 
