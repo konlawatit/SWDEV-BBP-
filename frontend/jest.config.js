@@ -15,7 +15,7 @@ module.exports = {
         "./node_modules/jest-html-reporter",
         {
           pageTitle: "Unit Test Report",
-          outputPath: "./coverage/report.html",
+          outputPath: "./frontend/coverage/report.html",
         },
       ],
     ],
