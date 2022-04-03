@@ -12,7 +12,7 @@ module.exports = {
     reporters: [
       "default",
       [
-        "../node_modules/jest-html-reporter",
+        "./node_modules/jest-html-reporter",
         {
           pageTitle: "Unit Test Report",
           outputPath: "./coverage/report.html",
