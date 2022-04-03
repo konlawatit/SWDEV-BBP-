@@ -10,8 +10,10 @@
     "production": "next build && next start",
     "heroku-postbuild": "npm run build",
     "test": "jest",
-    "unit-test": "jest --coverage /frontend/test/unit_test",
-    "component-test": "jest --coverage /frontend/test/component_test",
+    "unit-test": "jest /frontend/test/unit_test",
+    "unit-test-report": "jest --coverage /frontend/test/unit_test",
+    "component-test": "jest /frontend/test/component_test",
+    "component-test-report": "jest --coverage /frontend/test/component_test",
     "e2e-test": "cypress run"
   },
   "dependencies": {
