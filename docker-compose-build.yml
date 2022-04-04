@@ -1,0 +1,9 @@
+version: '3'
+services:
+  frontend:
+    build: ./frontend
+    image: konlawatit/team-13-frontend
+  backend:
+    build: ./backend
+    image: konlawatit/team-13-backend
+    
