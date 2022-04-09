@@ -6,7 +6,7 @@ const mongoose = require("mongoose")
 require('dotenv').config();
 const { connectMockDB, connectRealDB } = require("./config/database");
 
-const PORT = process.env.PORT || 3030;
+const PORT = process.env.PORT || 3013;
 
 const app = express()
 

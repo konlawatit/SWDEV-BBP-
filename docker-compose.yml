@@ -1,13 +1,11 @@
 version: '3.8'
 services:
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
+  team-13-backend:
+    image: konlawatit/
     volumes:
-      - ./backend:/backend
+      - ./backend:/team-13-backend:1.0
     ports:
-      - 3030:3030
+      - 3013:3013
     command:
       sh -c 'npm i && npm start'
   # nextjs:
