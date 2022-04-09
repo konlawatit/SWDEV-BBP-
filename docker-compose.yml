@@ -1,13 +1,15 @@
 version: '3.8'
 services:
   team-13-backend:
-    image: konlawatit/
-    volumes:
-      - ./backend:/team-13-backend:1.0
+    image: konlawatit/team-13-backend:1.0
     ports:
       - 3013:3013
     command:
       sh -c 'npm i && npm start'
+  team-13-frontend:
+    image: konlawatit/team-13-frontend:1.0
+    ports:
+      - 8013:8013
   # nextjs:
   #   build:
   #     context: ./frontend
