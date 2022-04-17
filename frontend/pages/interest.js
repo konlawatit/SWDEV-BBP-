@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import NavTab from "../component/NavTab";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { SearchBox } from "../component/SearchBox";
-import { BackDetail } from "../component/bankDetail";
+import { BankDetail } from "../component/BankDetail";
 
 const SERVER_URL = process.env.SERVER_URL
 
@@ -28,8 +28,10 @@ const Interest = () => {
         </div>
         <div className="row">
           <SearchBox/>
-          {/* <BackDetail/> */}
         </div>
+        {/* <div>
+          <BankDetail/>
+        </div> */}
       </div>
     </div>
   );

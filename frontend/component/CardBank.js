@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import { Card, Button, Row, Col } from "react-bootstrap";
-
+import { Card, Button, Row, Col, Modal } from "react-bootstrap";
 
 export const CardBank = (bank) => {
-    // console.log(bank);
+  const [detailModal, setDetailModal] = useState(false);
+  const detailClose = () => setDetailModal(false);
+  const detailShow = () => setDetailModal(true);
   return (
-    <div style={{ width: "100%",  }}>
-      <Card style={{ borderRadius: '20px' }}>
+    <div style={{ width: "100%" }}>
+      <Card style={{ borderRadius: "20px" }}>
         <Card.Body>
           <Row>
             <Col md="auto">
@@ -30,7 +31,7 @@ export const CardBank = (bank) => {
           </Row>
           <Row>
             <Col>
-              <Card.Text>Gst : {bank.gst}</Card.Text>
+              <Card.Text>MLR: {bank.mlr}  MOR: {bank.mor}  MRR: {bank.mrr}</Card.Text>
             </Col>
             <Col md="auto"></Col>
             <Col
@@ -46,9 +47,7 @@ export const CardBank = (bank) => {
           </Row>
           <Row>
             <Col>
-              <Card.Text>
-                {bank.address}
-              </Card.Text>
+              <Card.Text>{bank.address}</Card.Text>
             </Col>
             <Col md="auto"></Col>
             <Col
@@ -60,14 +59,25 @@ export const CardBank = (bank) => {
                 justifyContent: "flex-end",
               }}
             >
-              <Button variant="light">
-
-                ดูอัตราดอกเบี้ย
-              </Button>
+              <Button variant="light" onClick={detailShow}>ดูอัตราดอกเบี้ย</Button>
             </Col>
           </Row>
         </Card.Body>
       </Card>
+
+      <Modal size="lg" id="bankdetail" show={detailModal} onHide={detailClose}  centered>
+        <Modal.Header closeButton>
+          <Modal.Title>อัตราดอกเบี้ย</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="text-center" >
+          <img src={bank.interest_rate} style={{ width: "100%" }}></img>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button id="close" variant="secondary" onClick={detailClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

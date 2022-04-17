@@ -24,6 +24,15 @@ export const SearchBox = () => {
       setSearch(text)
     }
   };
+  const sortBy = (value) => {
+    if (value == "1") {
+      bank
+    }else if (value == "2") {
+
+    }else if (value == "3") {
+
+    }
+  }
   return (
     <div>
       <div style={{ margin: "20px 30px" }}>
@@ -39,12 +48,12 @@ export const SearchBox = () => {
             ></input>
           </Col>
           <Col xs lg="2">
-            <Form.Select aria-label="Default select example">
-              <option>New first</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </Form.Select>
+            {/* <Form.Select aria-label="Default select example" onChange={(e) => (sortBy(e.target.value))}>
+              <option>Sort by</option>
+              <option value="1">MLR</option>
+              <option value="2">MOR</option>
+              <option value="3">MRR</option>
+            </Form.Select> */}
           </Col>
         </Row>
         <div
