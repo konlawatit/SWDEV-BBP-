@@ -7,12 +7,12 @@ WORKDIR /usr/app/frontend
 
 COPY ./package.json .
 
-COPY yarn.lock .
+# COPY yarn.lock .
 
-RUN yarn install
+RUN npm install
 
 COPY . .
 
-RUN yarn run build
+RUN npm run build
 
 CMD ["npm", "start"]
