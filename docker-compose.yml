@@ -10,6 +10,8 @@ services:
     image: konlawatit/team-13-frontend:1.0.0
     ports:
       - 8013:8013
+    environment:
+      - PORT=8013
   # nextjs:
   #   build:
   #     context: ./frontend
