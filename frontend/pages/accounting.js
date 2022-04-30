@@ -12,13 +12,13 @@ import {GoogleLogin} from 'react-google-login';
 import { connect } from "react-redux";
 import UserSigninOrSignUp from '../component/UserSigninOrSignUp'
 
+import { setUser } from "../redux/actions/main";
+
 import axios from 'axios'
 
 const SERVER_URL = process.env.SERVER_URL
 
-const mapStateToProps = (state) => ({
-  main: state.main
-});
+
 
 // const mapDispatchToProps = {
 //   setUser: setUser,
@@ -45,6 +45,10 @@ const Accounting = (props, {file}) => {
     const viewExpenses = data
     .filter((item) => item.ac_type === "expenses")
     .map((data) => data);
+
+    useEffect(() => {
+      props.setUser({email:'5555', user_name: 'adsfadsf'})
+    }, [])
     
     useEffect(() => {
     if (localStorage.getItem("tokens_bbp")) {
@@ -321,4 +325,12 @@ const Accounting = (props, {file}) => {
   );
 }
 
-export default connect(state=>state)(Accounting)
+const mapStateToProps = (state) => ({
+  main: state.main
+});
+
+const mapDispatchToProps = {
+      setUser: setUser
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Accounting)
