@@ -92,7 +92,6 @@ export const Linechart= (account) => {
     }
     }
   );
-  console.log(data)
     return (
       <div className="border border-secondary rounded" style={{'height':'40vh'}}>
           <div className='d-flex flex-row m-3'>

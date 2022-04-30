@@ -1,9 +1,10 @@
 //Actions Type
-export const SET_NAME = "SET_NAME"
+export const SET_USER = "SET_USER"
 
 //Action Create
-export const setName = () => dispatch => {
+export const setUser = (payload) => dispatch => {
     dispatch({
-        type: SET_NAME
+        type: SET_USER,
+        payload
     })
 }

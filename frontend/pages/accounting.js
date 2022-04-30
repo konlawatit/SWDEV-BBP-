@@ -10,6 +10,7 @@ import data from "../component/accounting.json";
 import {Modal,Button } from 'react-bootstrap'
 import {GoogleLogin} from 'react-google-login';
 import { connect } from "react-redux";
+import UserSigninOrSignUp from '../component/UserSigninOrSignUp'
 
 import axios from 'axios'
 
@@ -62,6 +63,7 @@ const Accounting = (props, {file}) => {
   //     console.log('no session')
   //   }
   // }, [session])
+
 
   const options = [
     { value: "income", label: "รายรับ" },
@@ -131,7 +133,8 @@ const Accounting = (props, {file}) => {
             </div>
           </div>
           <div className="col-6">
-            <div className="d-flex justify-content-end">
+            <UserSigninOrSignUp />
+            {/* <div className="d-flex justify-content-end">
               {!session ? 
               (<button id="btn-signin" className="btn" onClick={loginShow}>
               <h4 className="p-2 mt-3">
@@ -150,7 +153,7 @@ const Accounting = (props, {file}) => {
                 Signed in as {session.user.email}
               </h4>
               </button>)}
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="row">
@@ -315,4 +318,4 @@ const Accounting = (props, {file}) => {
   );
 }
 
-export default Accounting
+export default connect(state=>state)(Accounting)

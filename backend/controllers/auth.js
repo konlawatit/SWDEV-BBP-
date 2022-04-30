@@ -104,6 +104,15 @@ router.post("/signin", async (req, res) => {
   }
 });
 
+router.get("/authen", verifyToken ,async (req, res) => {
+  try {
+    res.send(req.user)
+  } catch(err) {
+    console.log(err);
+    res.status(501).send(err);
+  }
+})
+
 // router.delete("/del", async (req, res) => {
 //   try {
 //     const delUser = await Users.remove({ email: "test@gmail.com" });
@@ -161,93 +170,93 @@ router.post("/revoke", async (req, res) => {
   }
 });
 
-router.post("/signin", async (req, res) => {
-  try {
-    const CLIENT_ID = GOOGLE_CREDENTIALS.client_id;
-    console.log(req.body);
-    // const id_token = req.body.payloads.id_token;
-    const {
-      id_token,
-      access_token,
-      refresh_token,
-      scope,
-      token_type,
-      expiry_date
-    } = req.body.payloads;
-    const client = new OAuth2Client(CLIENT_ID);
+// router.post("/signin", async (req, res) => {
+//   try {
+//     const CLIENT_ID = GOOGLE_CREDENTIALS.client_id;
+//     console.log(req.body);
+//     // const id_token = req.body.payloads.id_token;
+//     const {
+//       id_token,
+//       access_token,
+//       refresh_token,
+//       scope,
+//       token_type,
+//       expiry_date
+//     } = req.body.payloads;
+//     const client = new OAuth2Client(CLIENT_ID);
 
-    async function verify() {
-      const ticket = await client.verifyIdToken({
-        idToken: id_token,
-        audience: CLIENT_ID // Specify the CLIENT_ID of the app that accesses the backend
-        // Or, if multiple clients access the backend:
-        //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
-      });
-      const payload = ticket.getPayload();
-      Users.findOne(
-        {
-          email: payload.email
-        },
-        "access_token refresh_token expiry_date scope",
-        (err, userObj) => {
-          if (userObj) {
-            userObj.access_token = access_token;
-            userObj.refresh_token = refresh_token;
-            userObj.expiry_date = expiry_date;
-            userObj.scope = scope;
-            return userObj
-              .save()
-              .then(() => {
-                res.send("update user");
-              })
-              .catch((err) => {
-                res.send("update user err");
-              });
-          } else {
-            let user = new Users({
-              user_name: payload.name,
-              email: payload.email,
-              access_token: access_token,
-              refresh_token: refresh_token,
-              scope: scope,
-              token_type: token_type,
-              expiry_date: expiry_date
-            });
-            return user
-              .save()
-              .then(() => {
-                let accounting = new Accounting({
-                  user_email: payload.email,
-                  ac_list: []
-                });
-                accounting.save().then(() => {
-                  console.log("save user");
-                  res.send("save user successful");
-                });
-              })
-              .catch((err) => {
-                console.log("err save user", err);
-                res.send("signin err");
-              });
-          }
-        }
-      );
-    }
-    verify().catch((e) => {
-      console.log(e);
-      res.status(400).send({
-        statusCode: "400",
-        statusText: "Bad Request",
-        error: true,
-        message: "user invalid"
-      });
-    });
-  } catch (err) {
-    console.log("...", err);
-    res.status(500).send({
-      error: true
-    });
-  }
-});
+//     async function verify() {
+//       const ticket = await client.verifyIdToken({
+//         idToken: id_token,
+//         audience: CLIENT_ID // Specify the CLIENT_ID of the app that accesses the backend
+//         // Or, if multiple clients access the backend:
+//         //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
+//       });
+//       const payload = ticket.getPayload();
+//       Users.findOne(
+//         {
+//           email: payload.email
+//         },
+//         "access_token refresh_token expiry_date scope",
+//         (err, userObj) => {
+//           if (userObj) {
+//             userObj.access_token = access_token;
+//             userObj.refresh_token = refresh_token;
+//             userObj.expiry_date = expiry_date;
+//             userObj.scope = scope;
+//             return userObj
+//               .save()
+//               .then(() => {
+//                 res.send("update user");
+//               })
+//               .catch((err) => {
+//                 res.send("update user err");
+//               });
+//           } else {
+//             let user = new Users({
+//               user_name: payload.name,
+//               email: payload.email,
+//               access_token: access_token,
+//               refresh_token: refresh_token,
+//               scope: scope,
+//               token_type: token_type,
+//               expiry_date: expiry_date
+//             });
+//             return user
+//               .save()
+//               .then(() => {
+//                 let accounting = new Accounting({
+//                   user_email: payload.email,
+//                   ac_list: []
+//                 });
+//                 accounting.save().then(() => {
+//                   console.log("save user");
+//                   res.send("save user successful");
+//                 });
+//               })
+//               .catch((err) => {
+//                 console.log("err save user", err);
+//                 res.send("signin err");
+//               });
+//           }
+//         }
+//       );
+//     }
+//     verify().catch((e) => {
+//       console.log(e);
+//       res.status(400).send({
+//         statusCode: "400",
+//         statusText: "Bad Request",
+//         error: true,
+//         message: "user invalid"
+//       });
+//     });
+//   } catch (err) {
+//     console.log("...", err);
+//     res.status(500).send({
+//       error: true
+//     });
+//   }
+// });
 
 module.exports = router;

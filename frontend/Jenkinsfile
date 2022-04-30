@@ -59,20 +59,54 @@ pipeline {
         
             }
         }
-        stage('End-To-End Testing') {
-            steps {
-                sh 'cd frontend && npm run e2e-test || exit 0'
-            }
-        }
         stage('Build') {
             steps {
-                sh 'cd frontend && npm run build'
+                withCredentials([
+                    usernamePassword(credentialsId: 'username-password-ssh', passwordVariable: 'password', usernameVariable: 'user_name'), 
+                    string(credentialsId: 'backend-host', variable: 'host_ip'), string(credentialsId: 'host_name', variable: 'host_name'), 
+                    usernamePassword(credentialsId: 'team-13-dockerhub', passwordVariable: 'docker_password', usernameVariable: 'docker_username')]) {
+                    script{
+                        def remote = [:]
+                        remote.name = host_name
+                        remote.host = host_ip
+                        remote.user = user_name
+                        remote.password = password
+                        remote.allowAnyHosts = true
+                        
+                        sshCommand remote: remote, command: "rm -rf SWDEV-BBP-PLUS && git clone -b develop https://github.com/konlawatit/SWDEV-BBP-PLUS"
+                        sshCommand remote: remote, command: "docker-compose -f SWDEV-BBP-PLUS/docker-compose-build.yml build backend"
+                        sshCommand remote: remote, command: "docker login -u $docker_username -p $docker_password"
+                        sshCommand remote: remote, command: "docker push konlawatit/team-13-backend:1.0.0"
+                        sshCommand remote: remote, command: "docker image rmi -f konlawatit/team-13-backend:1.0.0"
+                        sshCommand remote: remote, command: "docker logout"
+                    }
+                }
             }
         }
         stage('Deployment') {
             steps {
-                echo '---------------------------- Deployment ----------------------------'
-                // sh ''
+                withCredentials([
+                    usernamePassword(credentialsId: 'username-password-ssh', passwordVariable: 'password', usernameVariable: 'user_name'), 
+                    string(credentialsId: 'backend-host', variable: 'host_ip'), string(credentialsId: 'host_name', variable: 'host_name'), 
+                    usernamePassword(credentialsId: 'team-13-dockerhub', passwordVariable: 'docker_password', usernameVariable: 'docker_username')]) {
+                    script{
+                        def remote = [:]
+                        remote.name = host_name
+                        remote.host = host_ip
+                        remote.user = user_name
+                        remote.password = password
+                        remote.allowAnyHosts = true
+                        
+                        // sshCommand remote: remote, command: "docker logout"
+                        sshCommand remote: remote, command: "docker-compose -f SWDEV-BBP-PLUS/docker-compose.yml up -d team-13-backend"
+                        sshCommand remote: remote, command: "rm -r SWDEV-BBP-PLUS"
+                    }
+                }
+            }
+        }
+        stage('End-To-End Testing') {
+            steps {
+                sh 'cd frontend && npm run e2e-test || exit 0'
             }
         }
     }
