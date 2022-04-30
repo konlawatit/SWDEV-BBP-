@@ -3,7 +3,6 @@ import axios from "axios"
 import GoogleProvider from "next-auth/providers/google"
 import { getToken } from "next-auth/jwt"
 
-console.log('1', process.env)
 
 export default NextAuth({
   
@@ -43,13 +42,13 @@ export default NextAuth({
           id_token: account.id_token
         }
 
-        axios.post(`${process.env.SERVER_URL}/auth/signin`, {
-          payloads: payloads
-        }).then(response => {
-          console.log('response', response)
-        }).catch(err => {
-          console.log('err', err)
-        })
+        // axios.post(`${process.env.SERVER_URL}/auth/signin`, {
+        //   payloads: payloads
+        // }).then(response => {
+        //   console.log('response', response)
+        // }).catch(err => {
+        //   console.log('err', err)
+        // })
 
       }
       return token

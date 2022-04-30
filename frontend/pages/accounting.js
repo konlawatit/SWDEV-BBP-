@@ -64,6 +64,7 @@ const Accounting = (props, {file}) => {
     }
   }, [])
 
+
   const options = [
     { value: "income", label: "รายรับ" },
     { value: "expenses", label: "รายจ่าย" },
@@ -320,4 +321,4 @@ const Accounting = (props, {file}) => {
   );
 }
 
-export default Accounting
+export default connect(state=>state)(Accounting)

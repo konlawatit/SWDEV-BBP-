@@ -112,6 +112,15 @@ router.post("/signin", async (req, res) => {
   }
 });
 
+router.get("/authen", verifyToken ,async (req, res) => {
+  try {
+    res.send(req.user)
+  } catch(err) {
+    console.log(err);
+    res.status(501).send(err);
+  }
+})
+
 // router.delete("/del", async (req, res) => {
 //   try {
 //     const delUser = await Users.remove({ email: "test@gmail.com" });
