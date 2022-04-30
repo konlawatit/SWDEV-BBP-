@@ -71,10 +71,11 @@ export const CardBank = (bank) => {
         </Modal.Header>
         <Modal.Body className="text-center" >
           <img src={bank.interest_rate} style={{ width: "100%" }}></img>
+
         </Modal.Body>
         <Modal.Footer>
-          <Button id="close" variant="secondary" onClick={detailClose}>
-            Close
+          <Button href={bank.website}>
+            ดูรายละเอียดเพิ่มเติม...
           </Button>
         </Modal.Footer>
       </Modal>
