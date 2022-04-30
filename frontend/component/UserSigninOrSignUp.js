@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {connect} from 'react-redux'
+import {connect, useDispatch} from 'react-redux'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import {Modal,Button } from 'react-bootstrap'
@@ -9,7 +9,7 @@ import { setUser } from "../redux/actions/main";
 
 const SERVER_URL = process.env.SERVER_URL
 
-const UserSigninOrSignUp = (props) => {
+const UserSigninOrSignUp = ({main, setUser}) => {
     const [loginModal, setLoginModal] = useState(false);
     const loginClose = () => setLoginModal(false);
     const loginShow = () => setLoginModal(true);
@@ -24,8 +24,8 @@ const UserSigninOrSignUp = (props) => {
         }).then(results => {
             // console.log(results)
             setSession(true)
-            props.setUser(results.data)
-            console.log('success', props.main)
+            setUser(results.data)
+            console.log('success', main)
         }).catch(err => {
             setSession(false)
             // setUser(null)
@@ -53,7 +53,7 @@ const UserSigninOrSignUp = (props) => {
                 icon={faUser}
                 style={{ "padding-right": "10px" }}
               />
-              {/* Signed in as {console.log(props)} */}
+              Signed in as {main.email}
             </h4>
           </button>
         )}
@@ -64,7 +64,7 @@ const UserSigninOrSignUp = (props) => {
           <Modal.Title>เข้าสู่ระบบ</Modal.Title>
         </Modal.Header>
         <Modal.Body className="text-center">
-          <button>Sign in with Google</button>
+          <button onClick={() => console.log(main)} >Sign in with Google</button>
         </Modal.Body>
         <Modal.Footer>
           <Button id="close" variant="secondary" onClick={loginClose}>
@@ -80,8 +80,10 @@ const mapStateToProps = state => ({
     main: state.main
 })
 
-const mapDispatchToProps = {
-    setUser: setUser
+const mapDispatchToProps = dispatch => {
+    return {
+        setUser: value => dispatch(setUser(value))
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserSigninOrSignUp)
