@@ -34,14 +34,14 @@ export default function NavTab() {
 >
     <SideNav.Toggle />
     <SideNav.Nav defaultSelected="">
-        <NavItem eventKey="">
+        {/* <NavItem eventKey="">
             <NavIcon>
                 <FontAwesomeIcon icon={faChartPie} className="text-white"/>
             </NavIcon>
             <NavText style={{color:'white'}}>
                 Dashboard
             </NavText>
-        </NavItem>
+        </NavItem> */}
         <NavItem eventKey="accounting" id="testLink" onClick={()=> setRouter("accounting")}>
             <NavIcon>
                 <FontAwesomeIcon icon={faWallet} className="text-white" />

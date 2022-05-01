@@ -4,6 +4,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import { SearchBox } from "../component/SearchBox";
 import { BankDetail } from "../component/BankDetail";
 import axios from "axios"
+import UserSigninOrSignUp from "../component/UserSigninOrSignUp";
 
 const SERVER_URL = process.env.SERVER_URL
 
@@ -32,8 +33,7 @@ const Interest = () => {
             </div>
           </div>
           <div className="col-6">
-            <div className="d-flex justify-content-end">
-            </div>
+            <UserSigninOrSignUp />
           </div>
         </div>
         <div className="row">

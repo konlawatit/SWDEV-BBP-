@@ -16,67 +16,10 @@ import Typography from '@mui/material/Typography';
 import { buildStyles, CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import axios from 'axios'
+import UserSigninOrSignUp from "../component/UserSigninOrSignUp";
 
 const SERVER_URL = process.env.SERVER_URL
 
-
-const mockData = [
-    {
-        "name": "ผ่อนรถ",
-        "type": "รายเดือน",
-        "total": "1,200,000",
-        "next_pay": "15,000",
-        "amout_period": "36",
-        "current_period": "15",
-        "description": "รถคันแรก",
-        "payment_day": "15/04/2022",
-        "status": "รอชำระ"
-    },
-    {
-        "name": "ผ่อนบ้าน",
-        "type": "รายเดือน",
-        "total": "5,000,000",
-        "next_pay": "10,000",
-        "amout_period": "240",
-        "current_period": "128",
-        "description": "บ้านที่อยู่ปัจจุบัน",
-        "payment_day": "03/04/2022",
-        "status": "รอชำระ"
-    },
-    {
-        "name": "ผ่อนโน้ตบุ๊ค",
-        "type": "รายเดือน",
-        "total": "32,000",
-        "next_pay": "3,200",
-        "amout_period": "10",
-        "current_period": "5",
-        "description": "โน้ตบุ๊คทำงาน",
-        "payment_day": "02/04/2022",
-        "status": "รอชำระ"
-    },
-    {
-        "name": "ผ่อนคอนโด",
-        "type": "รายเดือน",
-        "total": "2,000,000",
-        "next_pay": "20,000",
-        "amout_period": "100",
-        "current_period": "36",
-        "description": "คอนโดเด็ก",
-        "payment_day": "16/04/2022",
-        "status": "รอชำระ"
-    },
-    {
-        "name": "ผ่อนรถเมีย",
-        "type": "รายเดือน",
-        "total": "600,000",
-        "next_pay": "6,000",
-        "amout_period": "100",
-        "current_period": "50",
-        "description": "รถเมียหลวง",
-        "payment_day": "03/04/2022",
-        "status": "รอชำระ"
-    }
-]
 
 const Installment = (props) => {
     const [addItemModal, setAddItemModal] = useState(false);
@@ -102,14 +45,27 @@ const Installment = (props) => {
     const [description,setDescription] = useState("");
     const [payday,setPayday] = useState("");
 
+    const [data, setData] = useState([]);
+
     const submitForm = () => {
-        console.log(addname)
-        console.log(addamount)
-        console.log(addtype)
-        console.log(addpay)
-        console.log(addperiod)
-        console.log(description)
-        console.log(payday)
+      axios.post(`${SERVER_URL}/installment/add`, {
+        "name": addname,
+        "type": addtype,
+        "total": addamount,
+        "next_pay": addpay,
+        "amount_period": addperiod,
+        "current_period": 0,
+        "description": description,
+        "payment_day": payday,
+        "status": "รอชำระ"
+        }, {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem('tokens_bbp')}`
+          }
+        }).then(res => {
+          addItemModalClose()
+          setData(res.data.in_list)
+        })
     }
 
 
@@ -125,6 +81,17 @@ const Installment = (props) => {
         setPayalready(data.current_period)
         setPercentage(((data.current_period*100)/data.amout_period).toFixed(2))
     }
+
+    useEffect(() => {
+      axios.get(`${SERVER_URL}/installment/`, {headers: {
+        authorization: `Bearer ${localStorage.getItem("tokens_bbp")}`
+      }}).then(results => {
+        setData(results.data.in_list)
+      }).catch(err => {
+        console.log(err)
+      })
+    }, [])
+
   return (
     <div>
       <div className="mt-3" style={{ marginLeft: "10%",marginRight:'10%'}}>
@@ -138,6 +105,10 @@ const Installment = (props) => {
               <h5>รายการผ่อน</h5>
             </div>
           </div>
+          <div className="col-6">
+            <UserSigninOrSignUp />
+          </div>
+
           </div>
           <div className="row">
               <div className="col-4">
@@ -184,7 +155,7 @@ const Installment = (props) => {
               </div>
           </div>
           <div className="row mt-4">
-              <Installlist install={mockData} myfunc={setItem}/>
+              <Installlist install={data} myfunc={setItem}/>
           </div>
           <div className="row mb-2">
                 <div className="col mt-3" style={{display:'flex',justifyContent:'end'}}>

@@ -7,27 +7,14 @@ import React from 'react'
 import Navbar from '../component/Navbar'
 import {connect} from 'react-redux'
 import {incrementCounter,decrementCounter} from '../redux/actions/conterActions'
+import Accounting from './accounting'
 
 
 const Home = (props) => {
+  
   return (
     <>
-    <NavTab/>
-    <div>
-
-      <Head>
-        <title>Create Next App</title>
-      </Head>
-
-      <Navbar />
-
-      <div style={{textAlign:'center'}}>
-        <h1>Counter : {props.counter}</h1>
-        <button onClick={props.incrementCounter}>+ Count up</button> &nbsp;
-        <button onClick={props.decrementCounter}>+ Count down</button>
-      </div>
-    
-    </div>
+    <Accounting />
     </>
   )
 }

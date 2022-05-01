@@ -16,6 +16,7 @@ const gmailAPI = require("./controllers/gmailAPI")
 const accounting = require("./controllers/accounting")
 const auth = require("./controllers/auth")
 const interest = require("./controllers/interest")
+const installment = require("./controllers/installment")
 
 
 app.use(cors())
@@ -39,6 +40,10 @@ const routes = [
     {
       prefix: '/interest',
       target: interest
+    },
+    {
+      prefix: '/installment',
+      target: installment
     }
 ]
 for (let route of routes) {

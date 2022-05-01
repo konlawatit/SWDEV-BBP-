@@ -17,6 +17,7 @@ const center = {
 export const Installlist = ({install,myfunc}) => { 
   return(
     <div>
+      {console.log(install)}
         <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
