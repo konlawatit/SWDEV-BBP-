@@ -1,18 +1,24 @@
-import { SET_NAME } from "../actions/main";
+import { CLEAR_USER, SET_USER } from "../actions/main";
 
 let stateInit = {
-    name: ""
-}
+  email: "",
+  user_name: ""
+};
 
 const mainReducter = (state = stateInit, action) => {
-    switch (action.type) {
-        case SET_NAME:
-            console.log(action, 'test')
-            return {...state, name: "bas"}
-        default:
-            return {...state}
-    }   
-    
-}
+  switch (action.type) {
+    case SET_USER:
+      console.log(12121, action.payloads);
+      return {
+        ...state,
+        email: action.payloads.email,
+        user_name: action.payloads.user_name
+      };
+    case CLEAR_USER:
+      return { email: "", user_name: "" };
+    default:
+      return { ...state };
+  }
+};
 
 export default mainReducter;
