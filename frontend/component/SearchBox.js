@@ -3,11 +3,11 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import Form from "react-bootstrap/Form";
 import { Row, Col } from "react-bootstrap";
 import { CardBank } from "./CardBank";
-import bank from "./bank.json";
+// import bank from "./bank.json";
 
-export const SearchBox = () => {
+export const SearchBox = ({bank}) => {
   const [search, setSearch] = useState("");
-  const [fillBank, setFillBank] = useState(bank);
+  const [fillBank, setFillBank] = useState([]);
   const filterbank = (text) => {
     if (text !== "") {
       const filteredData = bank.filter((item) => {
@@ -33,8 +33,14 @@ export const SearchBox = () => {
 
     }
   }
+
+  useEffect(() => {
+    setFillBank(bank)
+  }, [bank])
+
   return (
     <div>
+      {console.log(bank)}
       <div style={{ margin: "20px 30px" }}>
         <Row>
           <Col xs lg="2">
@@ -65,7 +71,7 @@ export const SearchBox = () => {
           }}
         >
           {fillBank.map((bank) => (
-            <CardBank key={bank.id} {...bank} />
+            <CardBank key={bank._id} {...bank} />
           ))}
         </div>
       </div>

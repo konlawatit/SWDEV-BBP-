@@ -15,6 +15,7 @@ const mongodbUri = process.env.MONGODB_URI
 const gmailAPI = require("./controllers/gmailAPI")
 const accounting = require("./controllers/accounting")
 const auth = require("./controllers/auth")
+const interest = require("./controllers/interest")
 
 
 app.use(cors())
@@ -34,6 +35,10 @@ const routes = [
     {
         prefix: '/accounting',
         target: accounting
+    },
+    {
+      prefix: '/interest',
+      target: interest
     }
 ]
 for (let route of routes) {
