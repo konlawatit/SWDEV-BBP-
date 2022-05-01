@@ -1,0 +1,82 @@
+[
+    {
+        "name": "ธ.ก.ส.(BAAC)",
+        "title": "ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร",
+        "mlr": "4.875",
+        "mor": "6.250",
+        "mrr": "6.500",
+        "phone": "0-2555-0555",
+        "website": "https://www.baac.or.th/th/content-rate.php?content_group=9&content_group_sub=2&inside=1",
+        "interest_rate": "https://user-images.githubusercontent.com/80274964/163711235-7d91318f-482c-495a-9226-d459251ea666.jpg"
+    },
+    {
+        "name": "Krungthai",
+        "title": "ธนาคารกรุงไทย",
+        "mlr": "5.250",
+        "mor": "5.820",
+        "mrr": "6.220",
+        "phone": "0-2111-1111",
+        "website": "https://krungthai.com/th/rates/viewdetail/4",
+        "interest_rate": "https://user-images.githubusercontent.com/80274964/163711282-a35f82d1-bef1-410c-bb50-e693328d1581.jpg"
+    },
+    {
+        "name": "SCB",
+        "title": "ธนาคารไทยพาณิชย์",
+        "mlr": "5.250",
+        "mor": "5.845",
+        "mrr": "5.995",
+        "phone": "0-2777-7777",
+        "website": "https://www.scb.co.th/th/personal-banking/rates-fees.html",
+        "interest_rate": "https://user-images.githubusercontent.com/80274964/163711286-98ecf18b-e62c-42f4-8d94-93a3a36347d5.jpg"
+    },
+    {
+        "name": "Bangkok Bank",
+        "title": "ธนาคารกรุงเทพ",
+        "mlr": "5.250",
+        "mor": "5.875",
+        "mrr": "5.950",
+        "phone": "0-2645-5555 หรือ 1333",
+        "website": "https://www.bangkokbank.com/th-TH/Personal/Other-Services/View-Rates/Loan-Rates",
+        "interest_rate": "https://user-images.githubusercontent.com/80274964/163711278-32ed3087-25f4-44ea-8aa3-4f938e872350.jpg"
+    },
+    {
+        "name": "KBank",
+        "title": "ธนาคารกสิกรไทย",
+        "mlr": "5.470",
+        "mor": "5.840",
+        "mrr": "5.970",
+        "phone": "0-2888-8888",
+        "website": "https://www.kasikornbank.com/th/rate/Pages/lending.aspx",
+        "interest_rate": "https://user-images.githubusercontent.com/80274964/163711213-59eadb2a-4035-42db-beda-b07b9dc0d3ff.jpg"
+    },
+    {
+        "name": "Krungsri",
+        "title": "ธนาคารกรุงศรีอยุธยา",
+        "mlr": "5.580",
+        "mor": "5.950",
+        "mrr": "6.050",
+        "phone": "0-2296-2000 หรือ 1572",
+        "website": "https://www.krungsri.com/th/rates/loan-rates/for-loans",
+        "interest_rate": "https://user-images.githubusercontent.com/80274964/163711202-a389bd6e-a99b-4be3-bc56-911de4ce0fe2.jpg"
+    },
+    {
+        "name": "G H BANK",
+        "title": "ธนาคารอาคารสงเคราะห์",
+        "mlr": "5.750",
+        "mor": "5.900",
+        "mrr": "6.150",
+        "phone": "0-2645-9000",
+        "website": "https://www.ghbank.co.th/information/interest-rate/loan/",
+        "interest_rate": "https://user-images.githubusercontent.com/80274964/163711300-098619a7-5966-4de4-8eea-b040d91b9a7f.jpg"
+    },
+    {
+        "name": "ttb",
+        "title": "ธนาคารอาคารสงเคราะห์",
+        "mlr": "6.125",
+        "mor": "6.150",
+        "mrr": "6.280",
+        "phone": "0-2643-7000 หรือ 1428",
+        "website": "https://www.ttbbank.com/th/rates/loan-interest-rates",
+        "interest_rate": "https://user-images.githubusercontent.com/80274964/163711073-da1d193c-c2ff-426c-ac30-8aad885b9d36.jpg"
+    }
+]
