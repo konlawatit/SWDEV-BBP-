@@ -10,6 +10,7 @@ const Product = require("../models/test");
 
 //middleware
 const signinWithTest = require("../middleware/signinWithTest");
+const {verifyToken} = require("../middleware/auth")
 
 const {findOneAccounting, saveAccounting} = require("../repository/accounting")
 
@@ -34,9 +35,10 @@ router.get("/test", async (req, res) => {
 })
 
 
-router.post("/add", signinWithTest, async (req, res) => {
+router.post("/add", verifyToken, async (req, res) => {
   try {
-    const { title, date, amount, type, description, email } = req.body;
+    const { title, date, amount, type, description } = req.body;
+    const {email} = req.user
 
      Accounting.findOne(
       {
@@ -71,9 +73,9 @@ router.post("/add", signinWithTest, async (req, res) => {
   }
 });
 
-router.get("/get", signinWithTest, async (req, res) => {
+router.get("/get", verifyToken, async (req, res) => {
   try {
-    const email = req.headers.email;
+    const {email} = req.user;
     if (!email) throw("not have email")
 
     findOneAccounting(email).then(response => {
@@ -89,10 +91,9 @@ router.get("/get", signinWithTest, async (req, res) => {
   }
 });
 
-router.get("/get/gmail/:bank", signinWithTest, async (req, res) => {
+router.get("/get/gmail/:bank", verifyToken, async (req, res) => {
   try {
-    const email = req.headers.email;
-
+    const {email} = req.user;
     console.log('-----------------',email, req.params.bank)
     Users.findOne(
       {
@@ -375,7 +376,5 @@ router.get("/get/gmail/:bank", signinWithTest, async (req, res) => {
     });
   }
 });
-
-// router.put("/update");
 
 module.exports = router;

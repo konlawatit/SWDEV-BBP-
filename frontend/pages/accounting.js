@@ -46,23 +46,23 @@ const Accounting = (props, {file}) => {
     .filter((item) => item.ac_type === "expenses")
     .map((data) => data);
     
-    // useEffect(() => {
-
-  //   if (session) {
-  //     axios.get(`${SERVER_URL}/accounting/get`, {
-  //       headers: {
-  //         email: session.user.email
-  //       }
-  //     }).then(response => {
-  //       setAccountlist(response.data)
-  //       setFilterAc(response.data)
-  //     }).catch(err => {
-  //       console.log('err', err)
-  //     })
-  //   } else {
-  //     console.log('no session')
-  //   }
-  // }, [session])
+    useEffect(() => {
+    if (localStorage.getItem("tokens_bbp")) {
+      axios.get(`${SERVER_URL}/accounting/get`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("tokens_bbp")}`
+        }
+      }).then(response => {
+        setAccountlist(response.data)
+        setFilterAc(response.data)
+      }).catch(err => {
+        console.log('err', err)
+      })
+    } else {
+      setAccountlist([])
+      setFilterAc([])
+    }
+  }, [])
 
   const options = [
     { value: "income", label: "รายรับ" },
@@ -83,36 +83,39 @@ const Accounting = (props, {file}) => {
     } else if (title != "" && amount > 0 && type == "") {
       alert("โปรดเลือกประเภทของรายการ");
     } else if (title != "" && amount > 0 && type != "") {
-        // axios.post(`${SERVER_URL}/accounting/add`, {
-        // title: title,
-        // date: date,
-        // amount: amount,
-        // type: type,
-        // description: description,
-        // email:session.user.email
-        // })
-        // .then(function (response) {
-        //   axios.get(`${SERVER_URL}/accounting/get`, {
-        //     headers: {
-        //       email: session.user.email
-        //     }
-        //   }).then(response => {
-        //     // console.log('response', response)
-        //     setAccountlist(response.data)
-        //     setFilterAc(response.data)
-        //     addItemModalClose();
-        //     alert("เพิ่มรายการสำเร็จ");
-        //   }).catch(err => {
-        //     addItemModalClose();
-        //   alert("เพิ่มรายการไม่สำเร็จ");
-        //     console.log('err', err)
+        axios.post(`${SERVER_URL}/accounting/add`, {
+        title: title,
+        date: date,
+        amount: amount,
+        type: type,
+        description: description,
+        }, {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("tokens_bbp")}`
+          }
+        })
+        .then(function (response) {
+          axios.get(`${SERVER_URL}/accounting/get`, {
+            headers: {
+              authorization: `Bearer ${localStorage.getItem("tokens_bbp")}`
+            }
+          }).then(response => {
+            // console.log('response', response)
+            setAccountlist(response.data)
+            setFilterAc(response.data)
+            addItemModalClose();
+            alert("เพิ่มรายการสำเร็จ");
+          }).catch(err => {
+            addItemModalClose();
+          alert("เพิ่มรายการไม่สำเร็จ");
+            console.log('err', err)
             
-        //   })
-        // })
-        // .catch(function (error) {
-        // console.log(error);
-        // alert("เพิ่มรายการไม่สำเร็จ");
-        // });
+          })
+        })
+        .catch(function (error) {
+        console.log(error);
+        alert("เพิ่มรายการไม่สำเร็จ");
+        });
       }
   };
 

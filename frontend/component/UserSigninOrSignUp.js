@@ -22,7 +22,7 @@ const UserSigninOrSignUp = (props) => {
     axios
       .get(`${SERVER_URL}/auth/authen`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("tokens_bbp")}`
+          authorization: `Bearer ${localStorage.getItem("tokens_bbp")}`
         }
       })
       .then((results) => {
@@ -43,6 +43,7 @@ const UserSigninOrSignUp = (props) => {
     localStorage.removeItem("tokens_bbp")
     props.clearUser()
     setSession(false)
+    router.push("/")
   }
 
   return (
