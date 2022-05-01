@@ -27,6 +27,10 @@ export default function NavTab() {
         setLink(selected)
     }}
     route={link}
+    style={{
+        position: 'fixed',
+        overflow: 'auto'
+      }}
 >
     <SideNav.Toggle />
     <SideNav.Nav defaultSelected="">
