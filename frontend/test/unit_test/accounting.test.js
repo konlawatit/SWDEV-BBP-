@@ -30,13 +30,13 @@ describe("LoginModal", () => {
 
 describe("addModal", () => {
   
-  it("should render modal when click Add button", async () => {
-    const wrapper = shallow(<Accounting></Accounting>);
-    const btn = wrapper.find('#additem')
-    btn.simulate('click')
-    const modal = wrapper.find('#addmodal')
-    expect(modal.prop('show')).toEqual(true)
-  });
+  // it("should render modal when click Add button", async () => {
+  //   const wrapper = shallow(<Accounting></Accounting>);
+  //   const btn = wrapper.find('#additem')
+  //   btn.simulate('click')
+  //   const modal = wrapper.find('#addmodal')
+  //   expect(modal.prop('show')).toEqual(true)
+  // });
 
   it("should close modal when click close button", async () =>{
     const wrapper = shallow(<Accounting></Accounting>);
