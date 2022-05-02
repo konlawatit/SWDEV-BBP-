@@ -17,16 +17,16 @@ afterEach(() => {
 
 
 
-describe("LoginModal", () => {
+// describe("LoginModal", () => {
   
-  it("should render modal when click SignIn button", async () => {
-    const wrapper = shallow(<Accounting></Accounting>);
-    const btn = wrapper.find('#btn-signin')
-    btn.simulate('click');
-    const modal = wrapper.find('#loginModal')
-    expect(modal.prop('show')).toEqual(true)
-  });
-});
+//   it("should render modal when click SignIn button", async () => {
+//     const wrapper = shallow(<Accounting></Accounting>);
+//     const btn = wrapper.find('#btn-signin')
+//     btn.simulate('click');
+//     const modal = wrapper.find('#loginModal')
+//     expect(modal.prop('show')).toEqual(true)
+//   });
+// });
 
 describe("addModal", () => {
   
