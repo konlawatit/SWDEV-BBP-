@@ -46,9 +46,7 @@ const Accounting = (props, {file}) => {
     .filter((item) => item.ac_type === "expenses")
     .map((data) => data);
 
-    useEffect(() => {
-      props.setUser({email:'5555', user_name: 'adsfadsf'})
-    }, [])
+  
     
     useEffect(() => {
     if (localStorage.getItem("tokens_bbp")) {
@@ -326,12 +324,4 @@ const Accounting = (props, {file}) => {
   );
 }
 
-const mapStateToProps = (state) => ({
-  main: state.main
-});
-
-const mapDispatchToProps = {
-      setUser: setUser
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Accounting)
+export default Accounting
